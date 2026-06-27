@@ -1,0 +1,78 @@
+aid: herald
+name: Herald
+review:
+  question: Does Herald expose a documented public WebSocket API?
+  answer: false
+  date: '2026-06-25'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Herald's asynchronous delivery is
+    HTTP webhooks (server-to-server POST callbacks), not a streaming
+    transport. Under current API Evangelist scope, SSE is in-scope for
+    AsyncAPI modeling but Herald documents no SSE or WebSocket stream, so no
+    AsyncAPI artifact was created.
+findings:
+  summary: |
+    Herald does not publish a documented public WebSocket API. Herald is a
+    unified commercial-insurance REST API served under
+    https://api.heraldapi.com and authenticated with OAuth2
+    client-credentials bearer tokens (an API key may also be sent directly
+    as a bearer token; access tokens from /auth/token expire after 24
+    hours). Asynchronous updates - quote, file, and policy status changes
+    and submission creation - are delivered via HTTP webhook callbacks, not
+    a WebSocket or SSE stream. No realtime, bidirectional ws:// or wss://
+    endpoint is documented.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.heraldapi.com
+      documented: true
+    - protocol: Webhooks
+      scheme: https
+      note: Server-to-server HTTP POST callbacks for status-change and creation events; retried on non-200 responses. Not WebSocket.
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in Herald's API reference or developer docs as of the review date.
+  endpointsConfirmedRest:
+    - POST   https://api.heraldapi.com/auth/token
+    - POST   https://api.heraldapi.com/applications
+    - GET    https://api.heraldapi.com/applications/{application_id}
+    - PUT    https://api.heraldapi.com/applications/{application_id}
+    - POST   https://api.heraldapi.com/submissions
+    - GET    https://api.heraldapi.com/submissions/{submission_id}
+    - GET    https://api.heraldapi.com/quotes/{quote_id}
+    - GET    https://api.heraldapi.com/products
+    - GET    https://api.heraldapi.com/products/{product_id}
+    - GET    https://api.heraldapi.com/classifications
+    - POST   https://api.heraldapi.com/distributors
+    - GET    https://api.heraldapi.com/distributors
+    - POST   https://api.heraldapi.com/distributors/{distributor_id}/producers
+    - GET    https://api.heraldapi.com/distributors/{distributor_id}/producers
+    - GET    https://api.heraldapi.com/files/{file_id}
+    - POST   https://api.heraldapi.com/webhooks
+    - GET    https://api.heraldapi.com/webhooks
+    - DELETE https://api.heraldapi.com/webhooks/{webhook_id}
+sources:
+  - url: https://docs.heraldapi.com
+    type: Documentation
+    note: API reference home; REST resources with sample requests and responses. No WebSocket mentioned.
+  - url: https://docs.heraldapi.com/docs/heraldapi/5c69a421b6680-api-reference
+    type: APIReference
+    note: All documented endpoints are HTTPS REST.
+  - url: https://www.heraldai.com/intro-to-herald
+    type: Documentation
+    note: Describes the quote-to-bind workflow - applications, submissions, quotes - and webhook notifications.
+  - url: https://www.heraldai.com/docs/webhooks
+    type: Documentation
+    note: Asynchronous updates are delivered via HTTP webhook callbacks, not WebSocket or SSE.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists, and Herald's only asynchronous
+    transport is HTTP webhooks rather than a documented SSE or WebSocket
+    stream, so no AsyncAPI artifact was authored. The OpenAPI document
+    captures the documented REST surface and OAuth2 bearer security.

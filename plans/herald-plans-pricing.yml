@@ -1,0 +1,59 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Herald
+providerId: herald
+created: '2026-06-25'
+modified: '2026-06-25'
+reconciled: false
+tags:
+- Insurance
+- Insurtech
+- Commercial Insurance
+- Quoting
+- Carriers
+- Plans
+description: >-
+  Herald is sold through a sales-led, contract-based commercial model rather
+  than self-serve public pricing. Access to the unified API, the set of carrier
+  products a platform can quote, sandbox versus production environments, and
+  support levels are negotiated with Herald's team. No per-call or per-quote
+  list prices are published, so plan pricing is not reconciled here.
+notes: >-
+  Pricing is not publicly listed; engage Herald sales for product access,
+  carrier appointments, and commercial terms. Verify any quoted figures
+  directly with Herald during reconciliation.
+sources:
+- https://www.heraldapi.com
+- https://docs.heraldapi.com
+- https://www.heraldai.com/intro-to-herald
+plans:
+- id: herald-platform
+  name: Platform
+  type: enterprise
+  description: >-
+    Contract-based access to the Herald unified API for a software platform,
+    covering authentication, distributors and producers, the connected carrier
+    product set, applications, submissions, quotes, files, and webhooks.
+  entries:
+  - label: Platform Agreement
+    name: platform_agreement
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Unified Carrier API
+  - name: Applications and Submissions
+  - name: Quotes
+  - name: Products and Classifications
+  - name: Distributors and Producers
+  - name: Files
+  - name: Webhooks
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

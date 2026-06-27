@@ -1,0 +1,99 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Herald
+providerId: herald
+created: '2026-06-25'
+modified: '2026-06-25'
+reconciled: false
+tags:
+- Insurance
+- Insurtech
+- Commercial Insurance
+- Quoting
+- Carriers
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Herald spend. Herald is a sales-led, contract-based unified
+  commercial-insurance API; cost is governed by a negotiated platform agreement
+  rather than published per-call rates. This artifact frames the meters a
+  platform would track - submissions, quotes, applications, and connected
+  carrier products - to allocate and govern Herald usage internally. Rates are
+  not public and are not reconciled here.
+notes: >-
+  No public usage rates are published; confirm contract pricing, billing
+  cadence, and any usage components with Herald during reconciliation.
+sources:
+- https://www.heraldapi.com
+- https://docs.heraldapi.com
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Herald
+serviceCategory: Insurance
+billingModel:
+  pricingCategory: Commitment-Based
+  billingFrequency: Negotiated
+  billingCurrency: USD
+  chargeCategories:
+  - Purchase
+  - Usage
+  - Adjustment
+focusColumns:
+  ServiceName: Herald API
+  ServiceCategory: Insurance
+  ProviderName: Herald
+  PublisherName: Herald
+  InvoiceIssuerName: Herald
+  BillingCurrency: USD
+  ChargeCategory: Purchase
+  PricingCategory: Commitment-Based
+meters:
+- name: submissions
+  description: Applications submitted to carriers; each submission requests one quote per product.
+  unit: submissions
+  aggregation: sum
+  dimensions:
+  - platform
+  - producer
+  - product
+- name: quotes
+  description: Quotes returned from carriers and retrieved via the API or webhooks.
+  unit: quotes
+  aggregation: sum
+  dimensions:
+  - platform
+  - producer
+  - product
+- name: applications
+  description: Applications created and maintained prior to submission.
+  unit: applications
+  aggregation: sum
+  dimensions:
+  - platform
+  - producer
+- name: connected_products
+  description: Carrier products connected and made quotable to producers.
+  unit: products
+  aggregation: max
+  dimensions:
+  - platform
+  - producer
+principles:
+- name: Visibility
+  description: Track submissions, quotes, and connected products per producer and per carrier product.
+- name: Allocation
+  description: Map distributors and producers to internal teams or cost centers for chargeback.
+- name: Optimization
+  description: Complete applications before submitting to avoid duplicate submissions and wasted carrier quotes.
+- name: Accountability
+  description: Assign owners per platform integration; review submission and quote volume against the agreement.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

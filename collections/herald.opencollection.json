@@ -1,0 +1,313 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Herald API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Exchange API credentials for an access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.heraldapi.com/auth/token",
+            "body": {
+              "type": "json",
+              "data": "{\"grant_type\":\"client_credentials\",\"client_id\":\"{{clientId}}\",\"client_secret\":\"{{clientSecret}}\"}"
+            }
+          },
+          "docs": "OAuth2 client-credentials grant. Returns a bearer access token that expires after 24 hours."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Applications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.heraldapi.com/applications",
+            "body": {
+              "type": "json",
+              "data": "{\"products\":[\"prd_m3qr_herald_general_liability\"]}"
+            }
+          },
+          "docs": "Create an application for one or more products and receive the required risk and coverage values."
+        },
+        {
+          "info": {
+            "name": "Retrieve an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.heraldapi.com/applications/{{application_id}}"
+          },
+          "docs": "Retrieve a single application and its current values."
+        },
+        {
+          "info": {
+            "name": "Update an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.heraldapi.com/applications/{{application_id}}",
+            "body": {
+              "type": "json",
+              "data": "{\"risk_values\":[],\"coverage_values\":[]}"
+            }
+          },
+          "docs": "Submit values for the application's risk and coverage parameters."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Submissions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit an application to carriers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.heraldapi.com/submissions",
+            "body": {
+              "type": "json",
+              "data": "{\"producer_id\":\"prdcr_9f8e\",\"application\":{\"id\":\"app_a1b2c3\"}}"
+            }
+          },
+          "docs": "Submit a completed application, creating one quote per product."
+        },
+        {
+          "info": {
+            "name": "Retrieve a submission",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.heraldapi.com/submissions/{{submission_id}}"
+          },
+          "docs": "Retrieve a submission and its quote previews."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Quotes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.heraldapi.com/quotes/{{quote_id}}"
+          },
+          "docs": "Retrieve a normalized quote by quote_id, including status, premium, and files."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.heraldapi.com/products?producer_id={{producer_id}}"
+          },
+          "docs": "List the products a producer has access to."
+        },
+        {
+          "info": {
+            "name": "Retrieve a product",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.heraldapi.com/products/{{product_id}}"
+          },
+          "docs": "Retrieve a single product, including its carrier and line of business."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Classifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List NAICS index-entry classifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.heraldapi.com/classifications?query={{query}}"
+          },
+          "docs": "Search Herald's normalized NAICS index entries mapped to carrier codes."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Distributors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a distributor",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.heraldapi.com/distributors",
+            "body": {
+              "type": "json",
+              "data": "{\"name\":\"Acme Insurance Agency\",\"domains\":[\"acme-insurance.com\"]}"
+            }
+          },
+          "docs": "Create a distributor, the organizational layer above producers."
+        },
+        {
+          "info": {
+            "name": "List distributors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.heraldapi.com/distributors"
+          },
+          "docs": "List distributors."
+        },
+        {
+          "info": {
+            "name": "Create a producer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.heraldapi.com/distributors/{{distributor_id}}/producers",
+            "body": {
+              "type": "json",
+              "data": "{\"name\":\"Jane Broker\"}"
+            }
+          },
+          "docs": "Create a producer beneath a distributor."
+        },
+        {
+          "info": {
+            "name": "List producers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.heraldapi.com/distributors/{{distributor_id}}/producers"
+          },
+          "docs": "List producers under a distributor."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Files",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve file metadata and a download link",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.heraldapi.com/files/{{file_id}}"
+          },
+          "docs": "Retrieve file metadata and a temporary download link once the file is available."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a webhook subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.heraldapi.com/webhooks",
+            "body": {
+              "type": "json",
+              "data": "{\"url\":\"https://example.com/herald/webhook\",\"event_types\":[\"quote_status_update\",\"policy_status_update\"]}"
+            }
+          },
+          "docs": "Register a URL to receive POST callbacks for the selected event types."
+        },
+        {
+          "info": {
+            "name": "List webhook subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.heraldapi.com/webhooks"
+          },
+          "docs": "List webhook subscriptions."
+        },
+        {
+          "info": {
+            "name": "Delete a webhook subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.heraldapi.com/webhooks/{{webhook_id}}"
+          },
+          "docs": "Delete a webhook subscription."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,415 @@
+{
+  "info": {
+    "name": "Herald API",
+    "description": "Herald is a unified REST API for commercial insurance. Authenticate with an OAuth2 client-credentials bearer token, then create applications, submit them to carriers, and retrieve quotes, products, classifications, distributors, producers, files, and webhooks.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.heraldapi.com"
+    },
+    {
+      "key": "bearerToken",
+      "value": ""
+    },
+    {
+      "key": "clientId",
+      "value": ""
+    },
+    {
+      "key": "clientSecret",
+      "value": ""
+    },
+    {
+      "key": "application_id",
+      "value": ""
+    },
+    {
+      "key": "submission_id",
+      "value": ""
+    },
+    {
+      "key": "quote_id",
+      "value": ""
+    },
+    {
+      "key": "product_id",
+      "value": ""
+    },
+    {
+      "key": "producer_id",
+      "value": ""
+    },
+    {
+      "key": "distributor_id",
+      "value": ""
+    },
+    {
+      "key": "file_id",
+      "value": ""
+    },
+    {
+      "key": "webhook_id",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Exchange API credentials for an access token",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"grant_type\": \"client_credentials\",\n  \"client_id\": \"{{clientId}}\",\n  \"client_secret\": \"{{clientSecret}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/token",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "token"]
+            },
+            "description": "OAuth2 client-credentials grant. Returns a bearer access token that expires after 24 hours."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Applications",
+      "item": [
+        {
+          "name": "Create an application",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"products\": [\"prd_m3qr_herald_general_liability\"]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/applications",
+              "host": ["{{baseUrl}}"],
+              "path": ["applications"]
+            },
+            "description": "Create an application for one or more products and receive the required risk and coverage values."
+          }
+        },
+        {
+          "name": "Retrieve an application",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/applications/{{application_id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["applications", "{{application_id}}"]
+            },
+            "description": "Retrieve a single application and its current values."
+          }
+        },
+        {
+          "name": "Update an application",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"risk_values\": [],\n  \"coverage_values\": []\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/applications/{{application_id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["applications", "{{application_id}}"]
+            },
+            "description": "Submit values for the application's risk and coverage parameters."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Submissions",
+      "item": [
+        {
+          "name": "Submit an application to carriers",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"producer_id\": \"prdcr_9f8e\",\n  \"application\": { \"id\": \"app_a1b2c3\" }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/submissions",
+              "host": ["{{baseUrl}}"],
+              "path": ["submissions"]
+            },
+            "description": "Submit a completed application, creating one quote per product."
+          }
+        },
+        {
+          "name": "Retrieve a submission",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/submissions/{{submission_id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["submissions", "{{submission_id}}"]
+            },
+            "description": "Retrieve a submission and its quote previews."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Quotes",
+      "item": [
+        {
+          "name": "Retrieve a quote",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/quotes/{{quote_id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["quotes", "{{quote_id}}"]
+            },
+            "description": "Retrieve a normalized quote by quote_id, including status, premium, and files."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "List products",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/products?producer_id={{producer_id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["products"],
+              "query": [
+                {
+                  "key": "producer_id",
+                  "value": "{{producer_id}}"
+                }
+              ]
+            },
+            "description": "List the products a producer has access to."
+          }
+        },
+        {
+          "name": "Retrieve a product",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/products/{{product_id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["products", "{{product_id}}"]
+            },
+            "description": "Retrieve a single product, including its carrier and line of business."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Classifications",
+      "item": [
+        {
+          "name": "List NAICS index-entry classifications",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/classifications?query={{query}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["classifications"],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "{{query}}"
+                }
+              ]
+            },
+            "description": "Search Herald's normalized NAICS index entries mapped to carrier codes."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Distributors",
+      "item": [
+        {
+          "name": "Create a distributor",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Acme Insurance Agency\",\n  \"domains\": [\"acme-insurance.com\"]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/distributors",
+              "host": ["{{baseUrl}}"],
+              "path": ["distributors"]
+            },
+            "description": "Create a distributor, the organizational layer above producers."
+          }
+        },
+        {
+          "name": "List distributors",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/distributors",
+              "host": ["{{baseUrl}}"],
+              "path": ["distributors"]
+            },
+            "description": "List distributors."
+          }
+        },
+        {
+          "name": "Create a producer",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Jane Broker\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/distributors/{{distributor_id}}/producers",
+              "host": ["{{baseUrl}}"],
+              "path": ["distributors", "{{distributor_id}}", "producers"]
+            },
+            "description": "Create a producer beneath a distributor."
+          }
+        },
+        {
+          "name": "List producers",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/distributors/{{distributor_id}}/producers",
+              "host": ["{{baseUrl}}"],
+              "path": ["distributors", "{{distributor_id}}", "producers"]
+            },
+            "description": "List producers under a distributor."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Files",
+      "item": [
+        {
+          "name": "Retrieve file metadata and a download link",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/files/{{file_id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["files", "{{file_id}}"]
+            },
+            "description": "Retrieve file metadata and a temporary download link once the file is available."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Webhooks",
+      "item": [
+        {
+          "name": "Create a webhook subscription",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"https://example.com/herald/webhook\",\n  \"event_types\": [\"quote_status_update\", \"policy_status_update\"]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/webhooks",
+              "host": ["{{baseUrl}}"],
+              "path": ["webhooks"]
+            },
+            "description": "Register a URL to receive POST callbacks for the selected event types."
+          }
+        },
+        {
+          "name": "List webhook subscriptions",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/webhooks",
+              "host": ["{{baseUrl}}"],
+              "path": ["webhooks"]
+            },
+            "description": "List webhook subscriptions."
+          }
+        },
+        {
+          "name": "Delete a webhook subscription",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/webhooks/{{webhook_id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["webhooks", "{{webhook_id}}"]
+            },
+            "description": "Delete a webhook subscription."
+          }
+        }
+      ]
+    }
+  ]
+}

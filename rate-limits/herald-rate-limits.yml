@@ -1,0 +1,56 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Herald
+providerId: herald
+created: '2026-06-25'
+modified: '2026-06-25'
+reconciled: false
+tags:
+- Insurance
+- Insurtech
+- Commercial Insurance
+- Quoting
+- Carriers
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  Herald's REST API is authenticated per platform with OAuth2
+  client-credentials bearer tokens. Specific published request-rate limits are
+  not documented for the public API; throttling and any per-environment quotas
+  are governed by the platform's agreement and by downstream carrier
+  constraints on submissions and quoting. Specific values are not reconciled in
+  this artifact.
+notes: >-
+  Confirm any per-environment or per-endpoint limits, retry guidance, and
+  carrier-side submission throttling with Herald during reconciliation.
+sources:
+- https://docs.heraldapi.com
+- https://www.heraldapi.com
+responseCodes:
+  throttled: 429
+limits:
+- name: API Requests
+  scope: platform
+  metric: requests
+  limit: see provider documentation
+  notes: Per-platform request throttling governed by agreement; specific values not published.
+- name: Submissions
+  scope: platform
+  metric: submissions
+  limit: see provider documentation
+  notes: Submission throughput is also subject to downstream carrier constraints.
+- name: Access Tokens
+  scope: platform
+  metric: tokens
+  limit: 24-hour expiry
+  notes: Access tokens from /auth/token expire 24 hours after issuance and must be refreshed.
+policies:
+- name: Contracted Limits
+  description: Limits and environment access (sandbox vs production) are set by the platform agreement.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on 429 responses.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,786 @@
+openapi: 3.0.1
+info:
+  title: Herald API
+  description: >-
+    Herald is a unified REST API for commercial insurance. A single integration
+    lets software platforms create applications, submit them to many carriers,
+    and retrieve normalized quotes, products, classifications, distributors,
+    producers, and files. Requests are authenticated with an OAuth2
+    client-credentials bearer token; an API key may also be supplied directly
+    as a bearer token. The API is resource-oriented with JSON request and
+    response bodies and standard HTTP status codes.
+  termsOfService: https://www.heraldapi.com
+  contact:
+    name: Herald Support
+    url: https://docs.heraldapi.com
+  version: '1.0'
+servers:
+  - url: https://api.heraldapi.com
+    description: Production
+security:
+  - bearerAuth: []
+tags:
+  - name: Authentication
+  - name: Applications
+  - name: Submissions
+  - name: Quotes
+  - name: Products
+  - name: Classifications
+  - name: Distributors
+  - name: Producers
+  - name: Files
+  - name: Webhooks
+paths:
+  /auth/token:
+    post:
+      operationId: createAccessToken
+      tags:
+        - Authentication
+      summary: Exchange API credentials for an access token
+      description: >-
+        Use the OAuth2 client-credentials grant to exchange a client_id and
+        client_secret for a short-lived bearer access token. Access tokens
+        expire 24 hours after issuance. The returned token is sent in the
+        Authorization header as `Bearer <access_token>` on subsequent calls.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccessTokenRequest'
+      responses:
+        '200':
+          description: An access token was issued.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessTokenResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /applications:
+    post:
+      operationId: createApplication
+      tags:
+        - Applications
+      summary: Create an application
+      description: >-
+        Create an application for one or more products. Herald returns the set
+        of risk_values and coverage_values (questions) the selected products
+        require so they can be answered before submission.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationCreateRequest'
+      responses:
+        '201':
+          description: The application was created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+  /applications/{application_id}:
+    parameters:
+      - $ref: '#/components/parameters/ApplicationId'
+    get:
+      operationId: getApplication
+      tags:
+        - Applications
+      summary: Retrieve an application
+      description: Retrieve a single application, including its current risk and coverage values.
+      responses:
+        '200':
+          description: The requested application.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateApplication
+      tags:
+        - Applications
+      summary: Update an application
+      description: >-
+        Update an application by submitting values for its risk_values and
+        coverage_values. Conditional questions may be revealed as values are
+        supplied until the application is complete.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationUpdateRequest'
+      responses:
+        '200':
+          description: The updated application.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+  /submissions:
+    post:
+      operationId: createSubmission
+      tags:
+        - Submissions
+      summary: Submit an application to carriers
+      description: >-
+        Submit a completed application to carriers, creating one quote per
+        requested product. The response includes a quote_previews array with a
+        quote_id for each product. Submissions cannot be edited after creation.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmissionCreateRequest'
+      responses:
+        '201':
+          description: The submission was created and quotes were requested.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Submission'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+  /submissions/{submission_id}:
+    parameters:
+      - $ref: '#/components/parameters/SubmissionId'
+    get:
+      operationId: getSubmission
+      tags:
+        - Submissions
+      summary: Retrieve a submission
+      description: Retrieve a submission and its quote previews.
+      responses:
+        '200':
+          description: The requested submission.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Submission'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /quotes/{quote_id}:
+    parameters:
+      - $ref: '#/components/parameters/QuoteId'
+    get:
+      operationId: getQuote
+      tags:
+        - Quotes
+      summary: Retrieve a quote
+      description: >-
+        Retrieve a normalized quote by its quote_id, including status, premium,
+        coverage values, and any associated files. Poll until the quote and its
+        files reach an available status.
+      responses:
+        '200':
+          description: The requested quote.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quote'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /products:
+    get:
+      operationId: listProducts
+      tags:
+        - Products
+      summary: List products
+      description: >-
+        List the products a producer has access to. Filter by producer to see
+        only the carrier products that producer can quote.
+      parameters:
+        - name: producer_id
+          in: query
+          description: Return only products accessible to this producer.
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of products.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  products:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /products/{product_id}:
+    parameters:
+      - $ref: '#/components/parameters/ProductId'
+    get:
+      operationId: getProduct
+      tags:
+        - Products
+      summary: Retrieve a product
+      description: Retrieve a single product, including its carrier, line of business, and question set.
+      responses:
+        '200':
+          description: The requested product.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /classifications:
+    get:
+      operationId: listClassifications
+      tags:
+        - Classifications
+      summary: List NAICS index-entry classifications
+      description: >-
+        Search Herald's normalized NAICS index entries. Each Herald Code maps to
+        the corresponding carrier code for every supported product, giving a
+        single classification taxonomy across carriers.
+      parameters:
+        - name: query
+          in: query
+          description: A free-text search against NAICS index-entry descriptions.
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of classifications.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  classifications:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Classification'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /distributors:
+    post:
+      operationId: createDistributor
+      tags:
+        - Distributors
+      summary: Create a distributor
+      description: >-
+        Create a distributor, the organizational layer above producers,
+        identified by name and one or more domains.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DistributorCreateRequest'
+      responses:
+        '201':
+          description: The distributor was created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Distributor'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    get:
+      operationId: listDistributors
+      tags:
+        - Distributors
+      summary: List distributors
+      responses:
+        '200':
+          description: A list of distributors.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  distributors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Distributor'
+  /distributors/{distributor_id}/producers:
+    parameters:
+      - $ref: '#/components/parameters/DistributorId'
+    post:
+      operationId: createProducer
+      tags:
+        - Producers
+      summary: Create a producer
+      description: Create a producer beneath a distributor. Producers connect to products and submit applications.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProducerCreateRequest'
+      responses:
+        '201':
+          description: The producer was created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Producer'
+    get:
+      operationId: listProducers
+      tags:
+        - Producers
+      summary: List producers
+      responses:
+        '200':
+          description: A list of producers under the distributor.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  producers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Producer'
+  /files/{file_id}:
+    parameters:
+      - $ref: '#/components/parameters/FileId'
+    get:
+      operationId: getFile
+      tags:
+        - Files
+      summary: Retrieve file metadata and a download link
+      description: >-
+        Retrieve file metadata by file_id and a temporary download link, valid
+        for a short window, once the file reaches an available status.
+      responses:
+        '200':
+          description: The requested file.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /webhooks:
+    post:
+      operationId: createWebhook
+      tags:
+        - Webhooks
+      summary: Create a webhook subscription
+      description: >-
+        Register a URL to receive POST callbacks for the selected event types,
+        such as quote_status_update, file_status_update, policy_status_update,
+        and submission_creation. Deliveries are retried on non-200 responses.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookCreateRequest'
+      responses:
+        '201':
+          description: The webhook subscription was created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    get:
+      operationId: listWebhooks
+      tags:
+        - Webhooks
+      summary: List webhook subscriptions
+      responses:
+        '200':
+          description: A list of webhook subscriptions.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  webhooks:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Webhook'
+  /webhooks/{webhook_id}:
+    parameters:
+      - $ref: '#/components/parameters/WebhookId'
+    delete:
+      operationId: deleteWebhook
+      tags:
+        - Webhooks
+      summary: Delete a webhook subscription
+      responses:
+        '204':
+          description: The webhook subscription was deleted.
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >-
+        Send an API key or an access token from /auth/token in the
+        Authorization header as `Bearer <token>`. Access tokens are obtained via
+        the OAuth2 client-credentials grant and expire after 24 hours.
+  parameters:
+    ApplicationId:
+      name: application_id
+      in: path
+      required: true
+      description: The unique identifier of the application.
+      schema:
+        type: string
+    SubmissionId:
+      name: submission_id
+      in: path
+      required: true
+      description: The unique identifier of the submission.
+      schema:
+        type: string
+    QuoteId:
+      name: quote_id
+      in: path
+      required: true
+      description: The unique identifier of the quote.
+      schema:
+        type: string
+    ProductId:
+      name: product_id
+      in: path
+      required: true
+      description: The unique identifier of the product.
+      schema:
+        type: string
+    DistributorId:
+      name: distributor_id
+      in: path
+      required: true
+      description: The unique identifier of the distributor.
+      schema:
+        type: string
+    FileId:
+      name: file_id
+      in: path
+      required: true
+      description: The unique identifier of the file.
+      schema:
+        type: string
+    WebhookId:
+      name: webhook_id
+      in: path
+      required: true
+      description: The unique identifier of the webhook subscription.
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnprocessableEntity:
+      description: The request was well-formed but contained invalid values.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    AccessTokenRequest:
+      type: object
+      required:
+        - grant_type
+        - client_id
+        - client_secret
+      properties:
+        grant_type:
+          type: string
+          example: client_credentials
+        client_id:
+          type: string
+        client_secret:
+          type: string
+    AccessTokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+        token_type:
+          type: string
+          example: Bearer
+        expires_in:
+          type: integer
+          description: Lifetime of the access token in seconds.
+          example: 86400
+    Application:
+      type: object
+      properties:
+        id:
+          type: string
+          example: app_a1b2c3
+        status:
+          type: string
+          example: incomplete
+        products:
+          type: array
+          items:
+            type: string
+            example: prd_m3qr_herald_general_liability
+        risk_values:
+          type: array
+          items:
+            $ref: '#/components/schemas/ParameterValue'
+        coverage_values:
+          type: array
+          items:
+            $ref: '#/components/schemas/ParameterValue'
+    ApplicationCreateRequest:
+      type: object
+      required:
+        - products
+      properties:
+        products:
+          type: array
+          items:
+            type: string
+            example: prd_m3qr_herald_general_liability
+    ApplicationUpdateRequest:
+      type: object
+      properties:
+        risk_values:
+          type: array
+          items:
+            $ref: '#/components/schemas/ParameterValue'
+        coverage_values:
+          type: array
+          items:
+            $ref: '#/components/schemas/ParameterValue'
+    ParameterValue:
+      type: object
+      properties:
+        parameter_id:
+          type: string
+          example: rsk_b3jm_2017_naics_index
+        value: {}
+    SubmissionCreateRequest:
+      type: object
+      required:
+        - producer_id
+        - application
+      properties:
+        producer_id:
+          type: string
+          example: prdcr_9f8e
+        application:
+          type: object
+          description: The application id (dynamic) or full application object (static).
+          properties:
+            id:
+              type: string
+              example: app_a1b2c3
+    Submission:
+      type: object
+      properties:
+        id:
+          type: string
+          example: sub_7h6g
+        producer_id:
+          type: string
+          example: prdcr_9f8e
+        quote_previews:
+          type: array
+          items:
+            type: object
+            properties:
+              quote_id:
+                type: string
+                example: qot_5d4c
+              product_id:
+                type: string
+                example: prd_m3qr_herald_general_liability
+    Quote:
+      type: object
+      properties:
+        id:
+          type: string
+          example: qot_5d4c
+        status:
+          type: string
+          example: available
+        product_id:
+          type: string
+          example: prd_m3qr_herald_general_liability
+        premium:
+          type: number
+          example: 1450.0
+        currency:
+          type: string
+          example: USD
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+          example: prd_m3qr_herald_general_liability
+        name:
+          type: string
+          example: Herald General Liability
+        institution_id:
+          type: string
+          example: ins_century
+        line_of_business:
+          type: string
+          example: general_liability
+    Classification:
+      type: object
+      properties:
+        code:
+          type: string
+          description: The Herald Code for this NAICS index entry.
+          example: rsk_b3jm_2017_naics_index
+        description:
+          type: string
+          example: Restaurants, full-service
+        naics_code:
+          type: string
+          example: '722511'
+    Distributor:
+      type: object
+      properties:
+        id:
+          type: string
+          example: dst_1a2b
+        name:
+          type: string
+          example: Acme Insurance Agency
+        domains:
+          type: array
+          items:
+            type: string
+            example: acme-insurance.com
+    DistributorCreateRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          example: Acme Insurance Agency
+        domains:
+          type: array
+          items:
+            type: string
+            example: acme-insurance.com
+    Producer:
+      type: object
+      properties:
+        id:
+          type: string
+          example: prdcr_9f8e
+        distributor_id:
+          type: string
+          example: dst_1a2b
+        name:
+          type: string
+          example: Jane Broker
+    ProducerCreateRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          example: Jane Broker
+    File:
+      type: object
+      properties:
+        id:
+          type: string
+          example: fil_3c4d
+        status:
+          type: string
+          example: available
+        file_name:
+          type: string
+          example: quote-letter.pdf
+        content_type:
+          type: string
+          example: application/pdf
+        download_url:
+          type: string
+          format: uri
+          description: A temporary, time-limited download link.
+    Webhook:
+      type: object
+      properties:
+        id:
+          type: string
+          example: whk_2b3c
+        url:
+          type: string
+          format: uri
+          example: https://example.com/herald/webhook
+        event_types:
+          type: array
+          items:
+            type: string
+          example:
+            - quote_status_update
+            - file_status_update
+            - submission_creation
+    WebhookCreateRequest:
+      type: object
+      required:
+        - url
+        - event_types
+      properties:
+        url:
+          type: string
+          format: uri
+          example: https://example.com/herald/webhook
+        event_types:
+          type: array
+          items:
+            type: string
+          example:
+            - quote_status_update
+            - policy_status_update
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 422
+        title:
+          type: string
+          example: Unprocessable Entity
+        detail:
+          type: string
+          example: One or more parameter values are invalid.
