@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/herald-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: Send an API key or an access token from /auth/token in the Authorization header
+    as `Bearer <token>`. Access tokens are obtained via the OAuth2 client-credentials grant
+    and expire after 24 hours.
+  sources:
+  - openapi/herald-openapi.yml

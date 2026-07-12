@@ -168,6 +168,10 @@ apis:
     and creation events such as quote, file, and policy status updates and submission
     creation, retried on non-200 responses.
 common:
+- type: DomainSecurity
+  url: security/herald-domain-security.yml
+- type: Authentication
+  url: authentication/herald-authentication.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/heraldapi
 - type: Website
