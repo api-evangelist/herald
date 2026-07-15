@@ -168,6 +168,8 @@ apis:
     and creation events such as quote, file, and policy status updates and submission
     creation, retried on non-200 responses.
 common:
+- type: AgenticAccess
+  url: agentic-access/herald-agentic-access.yml
 - type: DomainSecurity
   url: security/herald-domain-security.yml
 - type: Authentication
