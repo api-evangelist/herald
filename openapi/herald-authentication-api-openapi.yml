@@ -1,0 +1,93 @@
+openapi: 3.0.1
+info:
+  title: Herald Applications Authentication API
+  description: Herald is a unified REST API for commercial insurance. A single integration lets software platforms create applications, submit them to many carriers, and retrieve normalized quotes, products, classifications, distributors, producers, and files. Requests are authenticated with an OAuth2 client-credentials bearer token; an API key may also be supplied directly as a bearer token. The API is resource-oriented with JSON request and response bodies and standard HTTP status codes.
+  termsOfService: https://www.heraldapi.com
+  contact:
+    name: Herald Support
+    url: https://docs.heraldapi.com
+  version: '1.0'
+servers:
+- url: https://api.heraldapi.com
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Authentication
+paths:
+  /auth/token:
+    post:
+      operationId: createAccessToken
+      tags:
+      - Authentication
+      summary: Exchange API credentials for an access token
+      description: Use the OAuth2 client-credentials grant to exchange a client_id and client_secret for a short-lived bearer access token. Access tokens expire 24 hours after issuance. The returned token is sent in the Authorization header as `Bearer <access_token>` on subsequent calls.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccessTokenRequest'
+      responses:
+        '200':
+          description: An access token was issued.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessTokenResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    AccessTokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+        token_type:
+          type: string
+          example: Bearer
+        expires_in:
+          type: integer
+          description: Lifetime of the access token in seconds.
+          example: 86400
+    AccessTokenRequest:
+      type: object
+      required:
+      - grant_type
+      - client_id
+      - client_secret
+      properties:
+        grant_type:
+          type: string
+          example: client_credentials
+        client_id:
+          type: string
+        client_secret:
+          type: string
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 422
+        title:
+          type: string
+          example: Unprocessable Entity
+        detail:
+          type: string
+          example: One or more parameter values are invalid.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Send an API key or an access token from /auth/token in the Authorization header as `Bearer <token>`. Access tokens are obtained via the OAuth2 client-credentials grant and expire after 24 hours.

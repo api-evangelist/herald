@@ -1,0 +1,89 @@
+openapi: 3.0.1
+info:
+  title: Herald Applications Files API
+  description: Herald is a unified REST API for commercial insurance. A single integration lets software platforms create applications, submit them to many carriers, and retrieve normalized quotes, products, classifications, distributors, producers, and files. Requests are authenticated with an OAuth2 client-credentials bearer token; an API key may also be supplied directly as a bearer token. The API is resource-oriented with JSON request and response bodies and standard HTTP status codes.
+  termsOfService: https://www.heraldapi.com
+  contact:
+    name: Herald Support
+    url: https://docs.heraldapi.com
+  version: '1.0'
+servers:
+- url: https://api.heraldapi.com
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Files
+paths:
+  /files/{file_id}:
+    parameters:
+    - $ref: '#/components/parameters/FileId'
+    get:
+      operationId: getFile
+      tags:
+      - Files
+      summary: Retrieve file metadata and a download link
+      description: Retrieve file metadata by file_id and a temporary download link, valid for a short window, once the file reaches an available status.
+      responses:
+        '200':
+          description: The requested file.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    File:
+      type: object
+      properties:
+        id:
+          type: string
+          example: fil_3c4d
+        status:
+          type: string
+          example: available
+        file_name:
+          type: string
+          example: quote-letter.pdf
+        content_type:
+          type: string
+          example: application/pdf
+        download_url:
+          type: string
+          format: uri
+          description: A temporary, time-limited download link.
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 422
+        title:
+          type: string
+          example: Unprocessable Entity
+        detail:
+          type: string
+          example: One or more parameter values are invalid.
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    FileId:
+      name: file_id
+      in: path
+      required: true
+      description: The unique identifier of the file.
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Send an API key or an access token from /auth/token in the Authorization header as `Bearer <token>`. Access tokens are obtained via the OAuth2 client-credentials grant and expire after 24 hours.

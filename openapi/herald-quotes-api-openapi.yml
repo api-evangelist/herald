@@ -1,0 +1,111 @@
+openapi: 3.0.1
+info:
+  title: Herald Applications Quotes API
+  description: Herald is a unified REST API for commercial insurance. A single integration lets software platforms create applications, submit them to many carriers, and retrieve normalized quotes, products, classifications, distributors, producers, and files. Requests are authenticated with an OAuth2 client-credentials bearer token; an API key may also be supplied directly as a bearer token. The API is resource-oriented with JSON request and response bodies and standard HTTP status codes.
+  termsOfService: https://www.heraldapi.com
+  contact:
+    name: Herald Support
+    url: https://docs.heraldapi.com
+  version: '1.0'
+servers:
+- url: https://api.heraldapi.com
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Quotes
+paths:
+  /quotes/{quote_id}:
+    parameters:
+    - $ref: '#/components/parameters/QuoteId'
+    get:
+      operationId: getQuote
+      tags:
+      - Quotes
+      summary: Retrieve a quote
+      description: Retrieve a normalized quote by its quote_id, including status, premium, coverage values, and any associated files. Poll until the quote and its files reach an available status.
+      responses:
+        '200':
+          description: The requested quote.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quote'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  parameters:
+    QuoteId:
+      name: quote_id
+      in: path
+      required: true
+      description: The unique identifier of the quote.
+      schema:
+        type: string
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Quote:
+      type: object
+      properties:
+        id:
+          type: string
+          example: qot_5d4c
+        status:
+          type: string
+          example: available
+        product_id:
+          type: string
+          example: prd_m3qr_herald_general_liability
+        premium:
+          type: number
+          example: 1450.0
+        currency:
+          type: string
+          example: USD
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+    File:
+      type: object
+      properties:
+        id:
+          type: string
+          example: fil_3c4d
+        status:
+          type: string
+          example: available
+        file_name:
+          type: string
+          example: quote-letter.pdf
+        content_type:
+          type: string
+          example: application/pdf
+        download_url:
+          type: string
+          format: uri
+          description: A temporary, time-limited download link.
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 422
+        title:
+          type: string
+          example: Unprocessable Entity
+        detail:
+          type: string
+          example: One or more parameter values are invalid.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Send an API key or an access token from /auth/token in the Authorization header as `Bearer <token>`. Access tokens are obtained via the OAuth2 client-credentials grant and expire after 24 hours.

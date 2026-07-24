@@ -1,0 +1,119 @@
+openapi: 3.0.1
+info:
+  title: Herald Applications Products API
+  description: Herald is a unified REST API for commercial insurance. A single integration lets software platforms create applications, submit them to many carriers, and retrieve normalized quotes, products, classifications, distributors, producers, and files. Requests are authenticated with an OAuth2 client-credentials bearer token; an API key may also be supplied directly as a bearer token. The API is resource-oriented with JSON request and response bodies and standard HTTP status codes.
+  termsOfService: https://www.heraldapi.com
+  contact:
+    name: Herald Support
+    url: https://docs.heraldapi.com
+  version: '1.0'
+servers:
+- url: https://api.heraldapi.com
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Products
+paths:
+  /products:
+    get:
+      operationId: listProducts
+      tags:
+      - Products
+      summary: List products
+      description: List the products a producer has access to. Filter by producer to see only the carrier products that producer can quote.
+      parameters:
+      - name: producer_id
+        in: query
+        description: Return only products accessible to this producer.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of products.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  products:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /products/{product_id}:
+    parameters:
+    - $ref: '#/components/parameters/ProductId'
+    get:
+      operationId: getProduct
+      tags:
+      - Products
+      summary: Retrieve a product
+      description: Retrieve a single product, including its carrier, line of business, and question set.
+      responses:
+        '200':
+          description: The requested product.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+          example: prd_m3qr_herald_general_liability
+        name:
+          type: string
+          example: Herald General Liability
+        institution_id:
+          type: string
+          example: ins_century
+        line_of_business:
+          type: string
+          example: general_liability
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 422
+        title:
+          type: string
+          example: Unprocessable Entity
+        detail:
+          type: string
+          example: One or more parameter values are invalid.
+  responses:
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    ProductId:
+      name: product_id
+      in: path
+      required: true
+      description: The unique identifier of the product.
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Send an API key or an access token from /auth/token in the Authorization header as `Bearer <token>`. Access tokens are obtained via the OAuth2 client-credentials grant and expire after 24 hours.

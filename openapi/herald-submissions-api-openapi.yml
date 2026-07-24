@@ -1,0 +1,142 @@
+openapi: 3.0.1
+info:
+  title: Herald Applications Submissions API
+  description: Herald is a unified REST API for commercial insurance. A single integration lets software platforms create applications, submit them to many carriers, and retrieve normalized quotes, products, classifications, distributors, producers, and files. Requests are authenticated with an OAuth2 client-credentials bearer token; an API key may also be supplied directly as a bearer token. The API is resource-oriented with JSON request and response bodies and standard HTTP status codes.
+  termsOfService: https://www.heraldapi.com
+  contact:
+    name: Herald Support
+    url: https://docs.heraldapi.com
+  version: '1.0'
+servers:
+- url: https://api.heraldapi.com
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Submissions
+paths:
+  /submissions:
+    post:
+      operationId: createSubmission
+      tags:
+      - Submissions
+      summary: Submit an application to carriers
+      description: Submit a completed application to carriers, creating one quote per requested product. The response includes a quote_previews array with a quote_id for each product. Submissions cannot be edited after creation.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmissionCreateRequest'
+      responses:
+        '201':
+          description: The submission was created and quotes were requested.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Submission'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+  /submissions/{submission_id}:
+    parameters:
+    - $ref: '#/components/parameters/SubmissionId'
+    get:
+      operationId: getSubmission
+      tags:
+      - Submissions
+      summary: Retrieve a submission
+      description: Retrieve a submission and its quote previews.
+      responses:
+        '200':
+          description: The requested submission.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Submission'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  parameters:
+    SubmissionId:
+      name: submission_id
+      in: path
+      required: true
+      description: The unique identifier of the submission.
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnprocessableEntity:
+      description: The request was well-formed but contained invalid values.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    SubmissionCreateRequest:
+      type: object
+      required:
+      - producer_id
+      - application
+      properties:
+        producer_id:
+          type: string
+          example: prdcr_9f8e
+        application:
+          type: object
+          description: The application id (dynamic) or full application object (static).
+          properties:
+            id:
+              type: string
+              example: app_a1b2c3
+    Submission:
+      type: object
+      properties:
+        id:
+          type: string
+          example: sub_7h6g
+        producer_id:
+          type: string
+          example: prdcr_9f8e
+        quote_previews:
+          type: array
+          items:
+            type: object
+            properties:
+              quote_id:
+                type: string
+                example: qot_5d4c
+              product_id:
+                type: string
+                example: prd_m3qr_herald_general_liability
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 422
+        title:
+          type: string
+          example: Unprocessable Entity
+        detail:
+          type: string
+          example: One or more parameter values are invalid.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Send an API key or an access token from /auth/token in the Authorization header as `Bearer <token>`. Access tokens are obtained via the OAuth2 client-credentials grant and expire after 24 hours.

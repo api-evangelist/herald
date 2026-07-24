@@ -1,0 +1,85 @@
+openapi: 3.0.1
+info:
+  title: Herald Applications Classifications API
+  description: Herald is a unified REST API for commercial insurance. A single integration lets software platforms create applications, submit them to many carriers, and retrieve normalized quotes, products, classifications, distributors, producers, and files. Requests are authenticated with an OAuth2 client-credentials bearer token; an API key may also be supplied directly as a bearer token. The API is resource-oriented with JSON request and response bodies and standard HTTP status codes.
+  termsOfService: https://www.heraldapi.com
+  contact:
+    name: Herald Support
+    url: https://docs.heraldapi.com
+  version: '1.0'
+servers:
+- url: https://api.heraldapi.com
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Classifications
+paths:
+  /classifications:
+    get:
+      operationId: listClassifications
+      tags:
+      - Classifications
+      summary: List NAICS index-entry classifications
+      description: Search Herald's normalized NAICS index entries. Each Herald Code maps to the corresponding carrier code for every supported product, giving a single classification taxonomy across carriers.
+      parameters:
+      - name: query
+        in: query
+        description: A free-text search against NAICS index-entry descriptions.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of classifications.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  classifications:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Classification'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Classification:
+      type: object
+      properties:
+        code:
+          type: string
+          description: The Herald Code for this NAICS index entry.
+          example: rsk_b3jm_2017_naics_index
+        description:
+          type: string
+          example: Restaurants, full-service
+        naics_code:
+          type: string
+          example: '722511'
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 422
+        title:
+          type: string
+          example: Unprocessable Entity
+        detail:
+          type: string
+          example: One or more parameter values are invalid.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Send an API key or an access token from /auth/token in the Authorization header as `Bearer <token>`. Access tokens are obtained via the OAuth2 client-credentials grant and expire after 24 hours.

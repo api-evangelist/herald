@@ -1,0 +1,179 @@
+openapi: 3.0.1
+info:
+  title: Herald Applications API
+  description: Herald is a unified REST API for commercial insurance. A single integration lets software platforms create applications, submit them to many carriers, and retrieve normalized quotes, products, classifications, distributors, producers, and files. Requests are authenticated with an OAuth2 client-credentials bearer token; an API key may also be supplied directly as a bearer token. The API is resource-oriented with JSON request and response bodies and standard HTTP status codes.
+  termsOfService: https://www.heraldapi.com
+  contact:
+    name: Herald Support
+    url: https://docs.heraldapi.com
+  version: '1.0'
+servers:
+- url: https://api.heraldapi.com
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Applications
+paths:
+  /applications:
+    post:
+      operationId: createApplication
+      tags:
+      - Applications
+      summary: Create an application
+      description: Create an application for one or more products. Herald returns the set of risk_values and coverage_values (questions) the selected products require so they can be answered before submission.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationCreateRequest'
+      responses:
+        '201':
+          description: The application was created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+  /applications/{application_id}:
+    parameters:
+    - $ref: '#/components/parameters/ApplicationId'
+    get:
+      operationId: getApplication
+      tags:
+      - Applications
+      summary: Retrieve an application
+      description: Retrieve a single application, including its current risk and coverage values.
+      responses:
+        '200':
+          description: The requested application.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateApplication
+      tags:
+      - Applications
+      summary: Update an application
+      description: Update an application by submitting values for its risk_values and coverage_values. Conditional questions may be revealed as values are supplied until the application is complete.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationUpdateRequest'
+      responses:
+        '200':
+          description: The updated application.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+components:
+  schemas:
+    ParameterValue:
+      type: object
+      properties:
+        parameter_id:
+          type: string
+          example: rsk_b3jm_2017_naics_index
+        value: {}
+    ApplicationCreateRequest:
+      type: object
+      required:
+      - products
+      properties:
+        products:
+          type: array
+          items:
+            type: string
+            example: prd_m3qr_herald_general_liability
+    ApplicationUpdateRequest:
+      type: object
+      properties:
+        risk_values:
+          type: array
+          items:
+            $ref: '#/components/schemas/ParameterValue'
+        coverage_values:
+          type: array
+          items:
+            $ref: '#/components/schemas/ParameterValue'
+    Application:
+      type: object
+      properties:
+        id:
+          type: string
+          example: app_a1b2c3
+        status:
+          type: string
+          example: incomplete
+        products:
+          type: array
+          items:
+            type: string
+            example: prd_m3qr_herald_general_liability
+        risk_values:
+          type: array
+          items:
+            $ref: '#/components/schemas/ParameterValue'
+        coverage_values:
+          type: array
+          items:
+            $ref: '#/components/schemas/ParameterValue'
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 422
+        title:
+          type: string
+          example: Unprocessable Entity
+        detail:
+          type: string
+          example: One or more parameter values are invalid.
+  responses:
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnprocessableEntity:
+      description: The request was well-formed but contained invalid values.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    ApplicationId:
+      name: application_id
+      in: path
+      required: true
+      description: The unique identifier of the application.
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Send an API key or an access token from /auth/token in the Authorization header as `Bearer <token>`. Access tokens are obtained via the OAuth2 client-credentials grant and expire after 24 hours.

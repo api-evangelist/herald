@@ -1,0 +1,110 @@
+openapi: 3.0.1
+info:
+  title: Herald Applications Distributors API
+  description: Herald is a unified REST API for commercial insurance. A single integration lets software platforms create applications, submit them to many carriers, and retrieve normalized quotes, products, classifications, distributors, producers, and files. Requests are authenticated with an OAuth2 client-credentials bearer token; an API key may also be supplied directly as a bearer token. The API is resource-oriented with JSON request and response bodies and standard HTTP status codes.
+  termsOfService: https://www.heraldapi.com
+  contact:
+    name: Herald Support
+    url: https://docs.heraldapi.com
+  version: '1.0'
+servers:
+- url: https://api.heraldapi.com
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Distributors
+paths:
+  /distributors:
+    post:
+      operationId: createDistributor
+      tags:
+      - Distributors
+      summary: Create a distributor
+      description: Create a distributor, the organizational layer above producers, identified by name and one or more domains.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DistributorCreateRequest'
+      responses:
+        '201':
+          description: The distributor was created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Distributor'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    get:
+      operationId: listDistributors
+      tags:
+      - Distributors
+      summary: List distributors
+      responses:
+        '200':
+          description: A list of distributors.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  distributors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Distributor'
+components:
+  responses:
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 422
+        title:
+          type: string
+          example: Unprocessable Entity
+        detail:
+          type: string
+          example: One or more parameter values are invalid.
+    Distributor:
+      type: object
+      properties:
+        id:
+          type: string
+          example: dst_1a2b
+        name:
+          type: string
+          example: Acme Insurance Agency
+        domains:
+          type: array
+          items:
+            type: string
+            example: acme-insurance.com
+    DistributorCreateRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          example: Acme Insurance Agency
+        domains:
+          type: array
+          items:
+            type: string
+            example: acme-insurance.com
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Send an API key or an access token from /auth/token in the Authorization header as `Bearer <token>`. Access tokens are obtained via the OAuth2 client-credentials grant and expire after 24 hours.
