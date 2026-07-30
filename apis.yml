@@ -7,7 +7,20 @@ description: Herald builds digital infrastructure for commercial insurance, prov
   carriers and lines of business. Developers create applications, submit them to
   carriers, and receive normalized quotes, products, classifications, and files
   through one integration secured with OAuth2 client-credentials bearer tokens.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/herald.png
 tags:
 - Insurance
 - Insurtech
@@ -18,155 +31,306 @@ created: '2026-06-25'
 modified: '2026-06-25'
 specificationVersion: '0.19'
 apis:
-- aid: herald:applications
+- aid: herald:herald-applications-api
   name: Herald Applications API
-  tags:
-  - Applications
-  - Risk Values
-  - Coverage Values
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  description: The Applications API from Herald — 2 operation(s) for applications.
   humanURL: https://docs.heraldapi.com/docs/heraldapi/5c69a421b6680-api-reference
   baseURL: https://api.heraldapi.com
-  properties:
-  - url: https://www.heraldai.com/docs/application
-    type: Documentation
-  - url: https://docs.heraldapi.com/docs/heraldapi/5c69a421b6680-api-reference
-    type: APIReference
-  - url: openapi/herald-openapi.yml
-    type: OpenAPI
-  - url: collections/herald.postman_collection.json
-    type: PostmanCollection
-  - url: collections/herald.opencollection.json
-    type: OpenCollection
-  description: Create and manage commercial-insurance applications for a set of products,
-    supplying risk_values and coverage_values until the application is complete and
-    ready to submit to carriers.
-- aid: herald:quotes
-  name: Herald Quotes API
   tags:
-  - Quotes
-  - Submissions
-  - Binding
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.heraldapi.com/docs/quotes
-  baseURL: https://api.heraldapi.com
+  - Applications
   properties:
-  - url: https://www.heraldapi.com/docs/quotes
-    type: Documentation
-  - url: openapi/herald-openapi.yml
-    type: OpenAPI
-  - url: collections/herald.postman_collection.json
-    type: PostmanCollection
-  - url: collections/herald.opencollection.json
-    type: OpenCollection
-  description: Submit completed applications to carriers via submissions and retrieve
-    normalized quotes, polling individual quotes by quote_id until each quote and its
-    files reach an available status.
-- aid: herald:products
-  name: Herald Products API
+  - type: OpenAPI
+    url: openapi/herald-applications-api-openapi.yml
+  - type: Documentation
+    url: https://www.heraldai.com/docs/application
+  - type: APIReference
+    url: https://docs.heraldapi.com/docs/heraldapi/5c69a421b6680-api-reference
+  - type: PostmanCollection
+    url: collections/herald.postman_collection.json
+  - type: OpenCollection
+    url: collections/herald.opencollection.json
+  - type: Documentation
+    url: https://www.heraldapi.com/docs/quotes
+  - type: Documentation
+    url: https://www.heraldai.com/docs/products
+  - type: Documentation
+    url: https://www.heraldai.com/docs/classifications
+  - type: Documentation
+    url: https://www.heraldai.com/docs/create-and-manage-distributors
+  - type: Documentation
+    url: https://www.heraldai.com/docs/getting-files
+  - type: Documentation
+    url: https://www.heraldai.com/docs/webhooks
+- aid: herald:herald-authentication-api
+  name: Herald Authentication API
+  description: The Authentication API from Herald — 1 operation(s) for authentication.
+  humanURL: https://docs.heraldapi.com/docs/heraldapi/5c69a421b6680-api-reference
+  baseURL: https://api.heraldapi.com
   tags:
-  - Products
-  - Producers
-  - Appetite
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.heraldai.com/docs/products
-  baseURL: https://api.heraldapi.com
+  - Authentication
   properties:
-  - url: https://www.heraldai.com/docs/products
-    type: Documentation
-  - url: openapi/herald-openapi.yml
-    type: OpenAPI
-  - url: collections/herald.postman_collection.json
-    type: PostmanCollection
-  - url: collections/herald.opencollection.json
-    type: OpenCollection
-  description: List the insurance products a producer has access to, each identified
-    by a unique product_id describing the carrier and line of business along with its
-    appetite and underwriting question set.
-- aid: herald:classifications
+  - type: OpenAPI
+    url: openapi/herald-authentication-api-openapi.yml
+  - type: Documentation
+    url: https://www.heraldai.com/docs/application
+  - type: APIReference
+    url: https://docs.heraldapi.com/docs/heraldapi/5c69a421b6680-api-reference
+  - type: PostmanCollection
+    url: collections/herald.postman_collection.json
+  - type: OpenCollection
+    url: collections/herald.opencollection.json
+  - type: Documentation
+    url: https://www.heraldapi.com/docs/quotes
+  - type: Documentation
+    url: https://www.heraldai.com/docs/products
+  - type: Documentation
+    url: https://www.heraldai.com/docs/classifications
+  - type: Documentation
+    url: https://www.heraldai.com/docs/create-and-manage-distributors
+  - type: Documentation
+    url: https://www.heraldai.com/docs/getting-files
+  - type: Documentation
+    url: https://www.heraldai.com/docs/webhooks
+- aid: herald:herald-classifications-api
   name: Herald Classifications API
+  description: The Classifications API from Herald — 1 operation(s) for classifications.
+  humanURL: https://docs.heraldapi.com/docs/heraldapi/5c69a421b6680-api-reference
+  baseURL: https://api.heraldapi.com
   tags:
   - Classifications
-  - NAICS
-  - Industry Codes
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.heraldai.com/docs/classifications
-  baseURL: https://api.heraldapi.com
   properties:
-  - url: https://www.heraldai.com/docs/classifications
-    type: Documentation
-  - url: openapi/herald-openapi.yml
-    type: OpenAPI
-  - url: collections/herald.postman_collection.json
-    type: PostmanCollection
-  - url: collections/herald.opencollection.json
-    type: OpenCollection
-  description: Look up Herald's normalized NAICS index-entry classifications, where each
-    Herald Code maps to the corresponding carrier code for every supported product so
-    risk can be classified consistently across carriers.
-- aid: herald:distributors
+  - type: OpenAPI
+    url: openapi/herald-classifications-api-openapi.yml
+  - type: Documentation
+    url: https://www.heraldai.com/docs/application
+  - type: APIReference
+    url: https://docs.heraldapi.com/docs/heraldapi/5c69a421b6680-api-reference
+  - type: PostmanCollection
+    url: collections/herald.postman_collection.json
+  - type: OpenCollection
+    url: collections/herald.opencollection.json
+  - type: Documentation
+    url: https://www.heraldapi.com/docs/quotes
+  - type: Documentation
+    url: https://www.heraldai.com/docs/products
+  - type: Documentation
+    url: https://www.heraldai.com/docs/classifications
+  - type: Documentation
+    url: https://www.heraldai.com/docs/create-and-manage-distributors
+  - type: Documentation
+    url: https://www.heraldai.com/docs/getting-files
+  - type: Documentation
+    url: https://www.heraldai.com/docs/webhooks
+- aid: herald:herald-distributors-api
   name: Herald Distributors API
+  description: The Distributors API from Herald — 1 operation(s) for distributors.
+  humanURL: https://docs.heraldapi.com/docs/heraldapi/5c69a421b6680-api-reference
+  baseURL: https://api.heraldapi.com
   tags:
   - Distributors
-  - Producers
-  - Onboarding
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.heraldai.com/docs/create-and-manage-distributors
-  baseURL: https://api.heraldapi.com
   properties:
-  - url: https://www.heraldai.com/docs/create-and-manage-distributors
-    type: Documentation
-  - url: openapi/herald-openapi.yml
-    type: OpenAPI
-  - url: collections/herald.postman_collection.json
-    type: PostmanCollection
-  - url: collections/herald.opencollection.json
-    type: OpenCollection
-  description: Create and manage distributors - the organizational layer above producers -
-    then create and list the producers beneath each distributor that connect to products
-    and submit applications.
-- aid: herald:files
+  - type: OpenAPI
+    url: openapi/herald-distributors-api-openapi.yml
+  - type: Documentation
+    url: https://www.heraldai.com/docs/application
+  - type: APIReference
+    url: https://docs.heraldapi.com/docs/heraldapi/5c69a421b6680-api-reference
+  - type: PostmanCollection
+    url: collections/herald.postman_collection.json
+  - type: OpenCollection
+    url: collections/herald.opencollection.json
+  - type: Documentation
+    url: https://www.heraldapi.com/docs/quotes
+  - type: Documentation
+    url: https://www.heraldai.com/docs/products
+  - type: Documentation
+    url: https://www.heraldai.com/docs/classifications
+  - type: Documentation
+    url: https://www.heraldai.com/docs/create-and-manage-distributors
+  - type: Documentation
+    url: https://www.heraldai.com/docs/getting-files
+  - type: Documentation
+    url: https://www.heraldai.com/docs/webhooks
+- aid: herald:herald-files-api
   name: Herald Files API
+  description: The Files API from Herald — 1 operation(s) for files.
+  humanURL: https://docs.heraldapi.com/docs/heraldapi/5c69a421b6680-api-reference
+  baseURL: https://api.heraldapi.com
   tags:
   - Files
-  - Documents
-  - Downloads
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.heraldai.com/docs/getting-files
-  baseURL: https://api.heraldapi.com
   properties:
-  - url: https://www.heraldai.com/docs/getting-files
-    type: Documentation
-  - url: openapi/herald-openapi.yml
-    type: OpenAPI
-  - url: collections/herald.postman_collection.json
-    type: PostmanCollection
-  - url: collections/herald.opencollection.json
-    type: OpenCollection
-  description: Retrieve file metadata by file_id and generate temporary download links for
-    quote letters, applications, and policy documents once a file reaches an available
-    status.
-- aid: herald:webhooks
+  - type: OpenAPI
+    url: openapi/herald-files-api-openapi.yml
+  - type: Documentation
+    url: https://www.heraldai.com/docs/application
+  - type: APIReference
+    url: https://docs.heraldapi.com/docs/heraldapi/5c69a421b6680-api-reference
+  - type: PostmanCollection
+    url: collections/herald.postman_collection.json
+  - type: OpenCollection
+    url: collections/herald.opencollection.json
+  - type: Documentation
+    url: https://www.heraldapi.com/docs/quotes
+  - type: Documentation
+    url: https://www.heraldai.com/docs/products
+  - type: Documentation
+    url: https://www.heraldai.com/docs/classifications
+  - type: Documentation
+    url: https://www.heraldai.com/docs/create-and-manage-distributors
+  - type: Documentation
+    url: https://www.heraldai.com/docs/getting-files
+  - type: Documentation
+    url: https://www.heraldai.com/docs/webhooks
+- aid: herald:herald-producers-api
+  name: Herald Producers API
+  description: The Producers API from Herald — 1 operation(s) for producers.
+  humanURL: https://docs.heraldapi.com/docs/heraldapi/5c69a421b6680-api-reference
+  baseURL: https://api.heraldapi.com
+  tags:
+  - Producers
+  properties:
+  - type: OpenAPI
+    url: openapi/herald-producers-api-openapi.yml
+  - type: Documentation
+    url: https://www.heraldai.com/docs/application
+  - type: APIReference
+    url: https://docs.heraldapi.com/docs/heraldapi/5c69a421b6680-api-reference
+  - type: PostmanCollection
+    url: collections/herald.postman_collection.json
+  - type: OpenCollection
+    url: collections/herald.opencollection.json
+  - type: Documentation
+    url: https://www.heraldapi.com/docs/quotes
+  - type: Documentation
+    url: https://www.heraldai.com/docs/products
+  - type: Documentation
+    url: https://www.heraldai.com/docs/classifications
+  - type: Documentation
+    url: https://www.heraldai.com/docs/create-and-manage-distributors
+  - type: Documentation
+    url: https://www.heraldai.com/docs/getting-files
+  - type: Documentation
+    url: https://www.heraldai.com/docs/webhooks
+- aid: herald:herald-products-api
+  name: Herald Products API
+  description: The Products API from Herald — 2 operation(s) for products.
+  humanURL: https://docs.heraldapi.com/docs/heraldapi/5c69a421b6680-api-reference
+  baseURL: https://api.heraldapi.com
+  tags:
+  - Products
+  properties:
+  - type: OpenAPI
+    url: openapi/herald-products-api-openapi.yml
+  - type: Documentation
+    url: https://www.heraldai.com/docs/application
+  - type: APIReference
+    url: https://docs.heraldapi.com/docs/heraldapi/5c69a421b6680-api-reference
+  - type: PostmanCollection
+    url: collections/herald.postman_collection.json
+  - type: OpenCollection
+    url: collections/herald.opencollection.json
+  - type: Documentation
+    url: https://www.heraldapi.com/docs/quotes
+  - type: Documentation
+    url: https://www.heraldai.com/docs/products
+  - type: Documentation
+    url: https://www.heraldai.com/docs/classifications
+  - type: Documentation
+    url: https://www.heraldai.com/docs/create-and-manage-distributors
+  - type: Documentation
+    url: https://www.heraldai.com/docs/getting-files
+  - type: Documentation
+    url: https://www.heraldai.com/docs/webhooks
+- aid: herald:herald-quotes-api
+  name: Herald Quotes API
+  description: The Quotes API from Herald — 1 operation(s) for quotes.
+  humanURL: https://docs.heraldapi.com/docs/heraldapi/5c69a421b6680-api-reference
+  baseURL: https://api.heraldapi.com
+  tags:
+  - Quotes
+  properties:
+  - type: OpenAPI
+    url: openapi/herald-quotes-api-openapi.yml
+  - type: Documentation
+    url: https://www.heraldai.com/docs/application
+  - type: APIReference
+    url: https://docs.heraldapi.com/docs/heraldapi/5c69a421b6680-api-reference
+  - type: PostmanCollection
+    url: collections/herald.postman_collection.json
+  - type: OpenCollection
+    url: collections/herald.opencollection.json
+  - type: Documentation
+    url: https://www.heraldapi.com/docs/quotes
+  - type: Documentation
+    url: https://www.heraldai.com/docs/products
+  - type: Documentation
+    url: https://www.heraldai.com/docs/classifications
+  - type: Documentation
+    url: https://www.heraldai.com/docs/create-and-manage-distributors
+  - type: Documentation
+    url: https://www.heraldai.com/docs/getting-files
+  - type: Documentation
+    url: https://www.heraldai.com/docs/webhooks
+- aid: herald:herald-submissions-api
+  name: Herald Submissions API
+  description: The Submissions API from Herald — 2 operation(s) for submissions.
+  humanURL: https://docs.heraldapi.com/docs/heraldapi/5c69a421b6680-api-reference
+  baseURL: https://api.heraldapi.com
+  tags:
+  - Submissions
+  properties:
+  - type: OpenAPI
+    url: openapi/herald-submissions-api-openapi.yml
+  - type: Documentation
+    url: https://www.heraldai.com/docs/application
+  - type: APIReference
+    url: https://docs.heraldapi.com/docs/heraldapi/5c69a421b6680-api-reference
+  - type: PostmanCollection
+    url: collections/herald.postman_collection.json
+  - type: OpenCollection
+    url: collections/herald.opencollection.json
+  - type: Documentation
+    url: https://www.heraldapi.com/docs/quotes
+  - type: Documentation
+    url: https://www.heraldai.com/docs/products
+  - type: Documentation
+    url: https://www.heraldai.com/docs/classifications
+  - type: Documentation
+    url: https://www.heraldai.com/docs/create-and-manage-distributors
+  - type: Documentation
+    url: https://www.heraldai.com/docs/getting-files
+  - type: Documentation
+    url: https://www.heraldai.com/docs/webhooks
+- aid: herald:herald-webhooks-api
   name: Herald Webhooks API
+  description: The Webhooks API from Herald — 2 operation(s) for webhooks.
+  humanURL: https://docs.heraldapi.com/docs/heraldapi/5c69a421b6680-api-reference
+  baseURL: https://api.heraldapi.com
   tags:
   - Webhooks
-  - Events
-  - Notifications
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.heraldai.com/docs/webhooks
-  baseURL: https://api.heraldapi.com
   properties:
-  - url: https://www.heraldai.com/docs/webhooks
-    type: Documentation
-  - url: openapi/herald-openapi.yml
-    type: OpenAPI
-  - url: collections/herald.postman_collection.json
-    type: PostmanCollection
-  - url: collections/herald.opencollection.json
-    type: OpenCollection
-  description: Register webhook subscriptions and receive POST callbacks for status-change
-    and creation events such as quote, file, and policy status updates and submission
-    creation, retried on non-200 responses.
+  - type: OpenAPI
+    url: openapi/herald-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://www.heraldai.com/docs/application
+  - type: APIReference
+    url: https://docs.heraldapi.com/docs/heraldapi/5c69a421b6680-api-reference
+  - type: PostmanCollection
+    url: collections/herald.postman_collection.json
+  - type: OpenCollection
+    url: collections/herald.opencollection.json
+  - type: Documentation
+    url: https://www.heraldapi.com/docs/quotes
+  - type: Documentation
+    url: https://www.heraldai.com/docs/products
+  - type: Documentation
+    url: https://www.heraldai.com/docs/classifications
+  - type: Documentation
+    url: https://www.heraldai.com/docs/create-and-manage-distributors
+  - type: Documentation
+    url: https://www.heraldai.com/docs/getting-files
+  - type: Documentation
+    url: https://www.heraldai.com/docs/webhooks
 common:
 - type: AgenticAccess
   url: agentic-access/herald-agentic-access.yml
