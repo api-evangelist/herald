@@ -1,0 +1,32 @@
+{
+  "provider": "herald",
+  "sources": [
+    "herald-applications-api-openapi.yml",
+    "herald-authentication-api-openapi.yml",
+    "herald-classifications-api-openapi.yml",
+    "herald-distributors-api-openapi.yml",
+    "herald-files-api-openapi.yml",
+    "herald-producers-api-openapi.yml",
+    "herald-products-api-openapi.yml",
+    "herald-quotes-api-openapi.yml",
+    "herald-submissions-api-openapi.yml",
+    "herald-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "herald-applications-api-openapi.yml",
+    "herald-authentication-api-openapi.yml",
+    "herald-classifications-api-openapi.yml",
+    "herald-distributors-api-openapi.yml",
+    "herald-files-api-openapi.yml",
+    "herald-producers-api-openapi.yml",
+    "herald-products-api-openapi.yml",
+    "herald-quotes-api-openapi.yml",
+    "herald-submissions-api-openapi.yml",
+    "herald-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
