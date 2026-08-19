@@ -1,0 +1,390 @@
+{
+  "item": [
+    {
+      "id": "03944df5-6cf3-414b-b622-0c74fb953bbb",
+      "name": "Submissions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e912a175-e0b7-4112-9086-b4aa13763563",
+          "name": "Submit an application to carriers",
+          "request": {
+            "name": "Submit an application to carriers",
+            "description": {
+              "content": "Submit a completed application to carriers, creating one quote per requested product. The response includes a quote_previews array with a quote_id for each product. Submissions cannot be edited after creation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "submissions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"producer_id\": \"<string>\",\n  \"application\": {\n    \"id\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7d2f239c-188e-4d79-a078-b7c4a7068781",
+              "name": "The submission was created and quotes were requested.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"producer_id\": \"prdcr_9f8e\",\n  \"application\": {\n    \"id\": \"app_a1b2c3\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"sub_7h6g\",\n  \"producer_id\": \"prdcr_9f8e\",\n  \"quote_previews\": [\n    {\n      \"quote_id\": \"qot_5d4c\",\n      \"product_id\": \"prd_m3qr_herald_general_liability\"\n    },\n    {\n      \"quote_id\": \"qot_5d4c\",\n      \"product_id\": \"prd_m3qr_herald_general_liability\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e37eb8ee-a042-4080-b8b8-461c62e39ce7",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"producer_id\": \"prdcr_9f8e\",\n  \"application\": {\n    \"id\": \"app_a1b2c3\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 422,\n  \"title\": \"Unprocessable Entity\",\n  \"detail\": \"One or more parameter values are invalid.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c9a435f4-4ccf-4a77-af58-20562c492719",
+              "name": "The request was well-formed but contained invalid values.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"producer_id\": \"prdcr_9f8e\",\n  \"application\": {\n    \"id\": \"app_a1b2c3\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 422,\n  \"title\": \"Unprocessable Entity\",\n  \"detail\": \"One or more parameter values are invalid.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4f45b448-ea4a-48c0-ae4b-8cf2ab43e68e",
+          "name": "Retrieve a submission",
+          "request": {
+            "name": "Retrieve a submission",
+            "description": {
+              "content": "Retrieve a submission and its quote previews.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "submissions",
+                ":submission_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "submission_id",
+                  "description": "(Required) The unique identifier of the submission."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "86c701f2-ff32-48a7-8930-ee71205a1deb",
+              "name": "The requested submission.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submission_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submission_id",
+                      "description": "(Required) The unique identifier of the submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"sub_7h6g\",\n  \"producer_id\": \"prdcr_9f8e\",\n  \"quote_previews\": [\n    {\n      \"quote_id\": \"qot_5d4c\",\n      \"product_id\": \"prd_m3qr_herald_general_liability\"\n    },\n    {\n      \"quote_id\": \"qot_5d4c\",\n      \"product_id\": \"prd_m3qr_herald_general_liability\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb67996b-996c-4589-b6ee-2f32706b3cfc",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submission_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submission_id",
+                      "description": "(Required) The unique identifier of the submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 422,\n  \"title\": \"Unprocessable Entity\",\n  \"detail\": \"One or more parameter values are invalid.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.heraldapi.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1db10273-039e-41af-89cc-9bfc6e52860d",
+    "name": "Herald Applications Submissions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Herald is a unified REST API for commercial insurance. A single integration lets software platforms create applications, submit them to many carriers, and retrieve normalized quotes, products, classifications, distributors, producers, and files. Requests are authenticated with an OAuth2 client-credentials bearer token; an API key may also be supplied directly as a bearer token. The API is resource-oriented with JSON request and response bodies and standard HTTP status codes.\n\nContact Support:\n Name: Herald Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Herald Applications Files API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Files",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve file metadata and a download link",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.heraldapi.com/files/:file_id",
+            "params": [
+              {
+                "name": "file_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the file."
+              }
+            ]
+          },
+          "docs": "Retrieve file metadata by file_id and a temporary download link, valid for a short window, once the file reaches an available status."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

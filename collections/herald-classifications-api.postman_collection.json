@@ -1,0 +1,179 @@
+{
+  "item": [
+    {
+      "id": "83b01d7d-e5e4-4361-848a-2a48a8ba2d7e",
+      "name": "Classifications",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2ae56706-0091-47f2-b4fb-fddc18b71ec3",
+          "name": "List NAICS index-entry classifications",
+          "request": {
+            "name": "List NAICS index-entry classifications",
+            "description": {
+              "content": "Search Herald's normalized NAICS index entries. Each Herald Code maps to the corresponding carrier code for every supported product, giving a single classification taxonomy across carriers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "classifications"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "A free-text search against NAICS index-entry descriptions."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6b68a6ca-7fda-438c-89ec-5cd8d0858f8e",
+              "name": "A list of classifications.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"classifications\": [\n    {\n      \"code\": \"rsk_b3jm_2017_naics_index\",\n      \"description\": \"Restaurants, full-service\",\n      \"naics_code\": \"722511\"\n    },\n    {\n      \"code\": \"rsk_b3jm_2017_naics_index\",\n      \"description\": \"Restaurants, full-service\",\n      \"naics_code\": \"722511\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9ad06d1-7083-415b-be8d-9ce33e7ce9da",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 422,\n  \"title\": \"Unprocessable Entity\",\n  \"detail\": \"One or more parameter values are invalid.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.heraldapi.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7de53daa-2408-41a7-9846-13da2362baf9",
+    "name": "Herald Applications Classifications API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Herald is a unified REST API for commercial insurance. A single integration lets software platforms create applications, submit them to many carriers, and retrieve normalized quotes, products, classifications, distributors, producers, and files. Requests are authenticated with an OAuth2 client-credentials bearer token; an API key may also be supplied directly as a bearer token. The API is resource-oriented with JSON request and response bodies and standard HTTP status codes.\n\nContact Support:\n Name: Herald Support",
+      "type": "text/plain"
+    }
+  }
+}

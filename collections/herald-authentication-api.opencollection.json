@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Herald Applications Authentication API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Exchange API credentials for an access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.heraldapi.com/auth/token",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use the OAuth2 client-credentials grant to exchange a client_id and client_secret for a short-lived bearer access token. Access tokens expire 24 hours after issuance. The returned token is sent in the Authorization header as `Bearer <access_token>` on subsequent calls."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

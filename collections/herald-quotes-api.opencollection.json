@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Herald Applications Quotes API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Quotes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.heraldapi.com/quotes/:quote_id",
+            "params": [
+              {
+                "name": "quote_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the quote."
+              }
+            ]
+          },
+          "docs": "Retrieve a normalized quote by its quote_id, including status, premium, coverage values, and any associated files. Poll until the quote and its files reach an available status."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

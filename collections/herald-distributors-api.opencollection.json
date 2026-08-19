@@ -1,0 +1,50 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Herald Applications Distributors API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Distributors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List distributors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.heraldapi.com/distributors"
+          },
+          "docs": "List distributors"
+        },
+        {
+          "info": {
+            "name": "Create a distributor",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.heraldapi.com/distributors",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a distributor, the organizational layer above producers, identified by name and one or more domains."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

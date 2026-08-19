@@ -1,0 +1,266 @@
+{
+  "item": [
+    {
+      "id": "037a97f6-89c2-4e0f-9a20-40533d083d90",
+      "name": "Distributors",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "89d416af-4e53-46da-bb55-449d850b0ac8",
+          "name": "Create a distributor",
+          "request": {
+            "name": "Create a distributor",
+            "description": {
+              "content": "Create a distributor, the organizational layer above producers, identified by name and one or more domains.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "distributors"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"domains\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a36c64bf-51af-4f21-becd-2707da29310b",
+              "name": "The distributor was created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "distributors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Acme Insurance Agency\",\n  \"domains\": [\n    \"acme-insurance.com\",\n    \"acme-insurance.com\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"dst_1a2b\",\n  \"name\": \"Acme Insurance Agency\",\n  \"domains\": [\n    \"acme-insurance.com\",\n    \"acme-insurance.com\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "72930735-0098-4ecb-95fd-096eeb901d51",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "distributors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Acme Insurance Agency\",\n  \"domains\": [\n    \"acme-insurance.com\",\n    \"acme-insurance.com\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 422,\n  \"title\": \"Unprocessable Entity\",\n  \"detail\": \"One or more parameter values are invalid.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b50b9b24-e15c-400a-81b0-ab927f1b6896",
+          "name": "List distributors",
+          "request": {
+            "name": "List distributors",
+            "description": {},
+            "url": {
+              "path": [
+                "distributors"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1e0546c6-b14b-4c66-98f7-d3f9461ed358",
+              "name": "A list of distributors.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "distributors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"distributors\": [\n    {\n      \"id\": \"dst_1a2b\",\n      \"name\": \"Acme Insurance Agency\",\n      \"domains\": [\n        \"acme-insurance.com\",\n        \"acme-insurance.com\"\n      ]\n    },\n    {\n      \"id\": \"dst_1a2b\",\n      \"name\": \"Acme Insurance Agency\",\n      \"domains\": [\n        \"acme-insurance.com\",\n        \"acme-insurance.com\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.heraldapi.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "20cb1ba4-6e74-4a7a-82f6-b8823b6b01a5",
+    "name": "Herald Applications Distributors API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Herald is a unified REST API for commercial insurance. A single integration lets software platforms create applications, submit them to many carriers, and retrieve normalized quotes, products, classifications, distributors, producers, and files. Requests are authenticated with an OAuth2 client-credentials bearer token; an API key may also be supplied directly as a bearer token. The API is resource-oriented with JSON request and response bodies and standard HTTP status codes.\n\nContact Support:\n Name: Herald Support",
+      "type": "text/plain"
+    }
+  }
+}

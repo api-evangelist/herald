@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Herald Applications Webhooks API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List webhook subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.heraldapi.com/webhooks"
+          },
+          "docs": "List webhook subscriptions"
+        },
+        {
+          "info": {
+            "name": "Create a webhook subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.heraldapi.com/webhooks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Register a URL to receive POST callbacks for the selected event types, such as quote_status_update, file_status_update, policy_status_update, and submission_creation. Deliveries are retried on non-200 responses."
+        },
+        {
+          "info": {
+            "name": "Delete a webhook subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.heraldapi.com/webhooks/:webhook_id",
+            "params": [
+              {
+                "name": "webhook_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the webhook subscription."
+              }
+            ]
+          },
+          "docs": "Delete a webhook subscription"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

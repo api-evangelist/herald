@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Herald Applications Products API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.heraldapi.com/products",
+            "params": [
+              {
+                "name": "producer_id",
+                "value": "",
+                "type": "query",
+                "description": "Return only products accessible to this producer."
+              }
+            ]
+          },
+          "docs": "List the products a producer has access to. Filter by producer to see only the carrier products that producer can quote."
+        },
+        {
+          "info": {
+            "name": "Retrieve a product",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.heraldapi.com/products/:product_id",
+            "params": [
+              {
+                "name": "product_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the product."
+              }
+            ]
+          },
+          "docs": "Retrieve a single product, including its carrier, line of business, and question set."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

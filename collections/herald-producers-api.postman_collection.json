@@ -1,0 +1,255 @@
+{
+  "item": [
+    {
+      "id": "bf789063-8504-43d5-aca4-abc7ca4d15b7",
+      "name": "Producers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ba4e58e0-33da-4142-a4fc-0036ee54c349",
+          "name": "Create a producer",
+          "request": {
+            "name": "Create a producer",
+            "description": {
+              "content": "Create a producer beneath a distributor. Producers connect to products and submit applications.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "distributors",
+                ":distributor_id",
+                "producers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "distributor_id",
+                  "description": "(Required) The unique identifier of the distributor."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2ad87ad6-9cd1-41c1-b29c-7288bab2d49d",
+              "name": "The producer was created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "distributors",
+                    ":distributor_id",
+                    "producers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "distributor_id",
+                      "description": "(Required) The unique identifier of the distributor."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Jane Broker\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"prdcr_9f8e\",\n  \"distributor_id\": \"dst_1a2b\",\n  \"name\": \"Jane Broker\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "53eebc41-46eb-44b9-a95d-57aaad8c3a22",
+          "name": "List producers",
+          "request": {
+            "name": "List producers",
+            "description": {},
+            "url": {
+              "path": [
+                "distributors",
+                ":distributor_id",
+                "producers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "distributor_id",
+                  "description": "(Required) The unique identifier of the distributor."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e88a7d57-50ac-4be5-8dd9-21d45cb3684a",
+              "name": "A list of producers under the distributor.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "distributors",
+                    ":distributor_id",
+                    "producers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "distributor_id",
+                      "description": "(Required) The unique identifier of the distributor."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"producers\": [\n    {\n      \"id\": \"prdcr_9f8e\",\n      \"distributor_id\": \"dst_1a2b\",\n      \"name\": \"Jane Broker\"\n    },\n    {\n      \"id\": \"prdcr_9f8e\",\n      \"distributor_id\": \"dst_1a2b\",\n      \"name\": \"Jane Broker\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.heraldapi.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9e62a194-b328-4fcb-b678-0e5b76992ef2",
+    "name": "Herald Applications Producers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Herald is a unified REST API for commercial insurance. A single integration lets software platforms create applications, submit them to many carriers, and retrieve normalized quotes, products, classifications, distributors, producers, and files. Requests are authenticated with an OAuth2 client-credentials bearer token; an API key may also be supplied directly as a bearer token. The API is resource-oriented with JSON request and response bodies and standard HTTP status codes.\n\nContact Support:\n Name: Herald Support",
+      "type": "text/plain"
+    }
+  }
+}

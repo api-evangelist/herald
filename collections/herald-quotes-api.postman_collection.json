@@ -1,0 +1,189 @@
+{
+  "item": [
+    {
+      "id": "c6e53892-51a0-46cb-bc44-e248b08b895c",
+      "name": "Quotes",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "38ce8202-fb2e-4908-a787-72d99563121e",
+          "name": "Retrieve a quote",
+          "request": {
+            "name": "Retrieve a quote",
+            "description": {
+              "content": "Retrieve a normalized quote by its quote_id, including status, premium, coverage values, and any associated files. Poll until the quote and its files reach an available status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "quotes",
+                ":quote_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "quote_id",
+                  "description": "(Required) The unique identifier of the quote."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1a7c6e45-1d0f-4fc8-a554-7981e6e60068",
+              "name": "The requested quote.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes",
+                    ":quote_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "quote_id",
+                      "description": "(Required) The unique identifier of the quote."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"qot_5d4c\",\n  \"status\": \"available\",\n  \"product_id\": \"prd_m3qr_herald_general_liability\",\n  \"premium\": 1450,\n  \"currency\": \"USD\",\n  \"files\": [\n    {\n      \"id\": \"fil_3c4d\",\n      \"status\": \"available\",\n      \"file_name\": \"quote-letter.pdf\",\n      \"content_type\": \"application/pdf\",\n      \"download_url\": \"https://zijMbJcngvNQbDUDJMqlNvugyfniaLP.nrsuv1pyi,1QE\"\n    },\n    {\n      \"id\": \"fil_3c4d\",\n      \"status\": \"available\",\n      \"file_name\": \"quote-letter.pdf\",\n      \"content_type\": \"application/pdf\",\n      \"download_url\": \"https://vtz.whpaxUomymCBzXULkhOrSMTTlb4eWECCH\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b2e80c4e-e226-4d6e-9565-90c0bbbbfe7e",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes",
+                    ":quote_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "quote_id",
+                      "description": "(Required) The unique identifier of the quote."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 422,\n  \"title\": \"Unprocessable Entity\",\n  \"detail\": \"One or more parameter values are invalid.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.heraldapi.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8570a79e-1094-453b-a805-4d9f14bccff1",
+    "name": "Herald Applications Quotes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Herald is a unified REST API for commercial insurance. A single integration lets software platforms create applications, submit them to many carriers, and retrieve normalized quotes, products, classifications, distributors, producers, and files. Requests are authenticated with an OAuth2 client-credentials bearer token; an API key may also be supplied directly as a bearer token. The API is resource-oriented with JSON request and response bodies and standard HTTP status codes.\n\nContact Support:\n Name: Herald Support",
+      "type": "text/plain"
+    }
+  }
+}

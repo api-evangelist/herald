@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Herald Applications Submissions API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Submissions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit an application to carriers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.heraldapi.com/submissions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a completed application to carriers, creating one quote per requested product. The response includes a quote_previews array with a quote_id for each product. Submissions cannot be edited after creation."
+        },
+        {
+          "info": {
+            "name": "Retrieve a submission",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.heraldapi.com/submissions/:submission_id",
+            "params": [
+              {
+                "name": "submission_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the submission."
+              }
+            ]
+          },
+          "docs": "Retrieve a submission and its quote previews."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

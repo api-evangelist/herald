@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Herald Applications API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Applications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.heraldapi.com/applications",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an application for one or more products. Herald returns the set of risk_values and coverage_values (questions) the selected products require so they can be answered before submission."
+        },
+        {
+          "info": {
+            "name": "Retrieve an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.heraldapi.com/applications/:application_id",
+            "params": [
+              {
+                "name": "application_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the application."
+              }
+            ]
+          },
+          "docs": "Retrieve a single application, including its current risk and coverage values."
+        },
+        {
+          "info": {
+            "name": "Update an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.heraldapi.com/applications/:application_id",
+            "params": [
+              {
+                "name": "application_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the application."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an application by submitting values for its risk_values and coverage_values. Conditional questions may be revealed as values are supplied until the application is complete."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

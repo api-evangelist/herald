@@ -1,0 +1,627 @@
+{
+  "item": [
+    {
+      "id": "157373e6-6374-4029-bd10-5ad675ab8605",
+      "name": "Applications",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b0c89364-7f32-4430-b900-1c3df834fb9d",
+          "name": "Create an application",
+          "request": {
+            "name": "Create an application",
+            "description": {
+              "content": "Create an application for one or more products. Herald returns the set of risk_values and coverage_values (questions) the selected products require so they can be answered before submission.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "applications"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"products\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "94eada72-d86e-45bc-87af-c8e843527eb5",
+              "name": "The application was created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"products\": [\n    \"prd_m3qr_herald_general_liability\",\n    \"prd_m3qr_herald_general_liability\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"app_a1b2c3\",\n  \"status\": \"incomplete\",\n  \"products\": [\n    \"prd_m3qr_herald_general_liability\",\n    \"prd_m3qr_herald_general_liability\"\n  ],\n  \"risk_values\": [\n    {\n      \"parameter_id\": \"rsk_b3jm_2017_naics_index\",\n      \"value\": \"\"\n    },\n    {\n      \"parameter_id\": \"rsk_b3jm_2017_naics_index\",\n      \"value\": \"\"\n    }\n  ],\n  \"coverage_values\": [\n    {\n      \"parameter_id\": \"rsk_b3jm_2017_naics_index\",\n      \"value\": \"\"\n    },\n    {\n      \"parameter_id\": \"rsk_b3jm_2017_naics_index\",\n      \"value\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed8ebdbd-fc79-481d-93a4-0c00074ca763",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"products\": [\n    \"prd_m3qr_herald_general_liability\",\n    \"prd_m3qr_herald_general_liability\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 422,\n  \"title\": \"Unprocessable Entity\",\n  \"detail\": \"One or more parameter values are invalid.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b32db3cc-c2c7-40b0-a408-52a0c46edc51",
+              "name": "The request was well-formed but contained invalid values.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"products\": [\n    \"prd_m3qr_herald_general_liability\",\n    \"prd_m3qr_herald_general_liability\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 422,\n  \"title\": \"Unprocessable Entity\",\n  \"detail\": \"One or more parameter values are invalid.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2b4b4146-08c8-4baf-a40f-b9095d4c8c18",
+          "name": "Retrieve an application",
+          "request": {
+            "name": "Retrieve an application",
+            "description": {
+              "content": "Retrieve a single application, including its current risk and coverage values.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "applications",
+                ":application_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "application_id",
+                  "description": "(Required) The unique identifier of the application."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b5c20101-bf7c-4a2a-8646-a0df514c5c3e",
+              "name": "The requested application.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":application_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "application_id",
+                      "description": "(Required) The unique identifier of the application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"app_a1b2c3\",\n  \"status\": \"incomplete\",\n  \"products\": [\n    \"prd_m3qr_herald_general_liability\",\n    \"prd_m3qr_herald_general_liability\"\n  ],\n  \"risk_values\": [\n    {\n      \"parameter_id\": \"rsk_b3jm_2017_naics_index\",\n      \"value\": \"\"\n    },\n    {\n      \"parameter_id\": \"rsk_b3jm_2017_naics_index\",\n      \"value\": \"\"\n    }\n  ],\n  \"coverage_values\": [\n    {\n      \"parameter_id\": \"rsk_b3jm_2017_naics_index\",\n      \"value\": \"\"\n    },\n    {\n      \"parameter_id\": \"rsk_b3jm_2017_naics_index\",\n      \"value\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a622447e-72d3-41d7-831b-94b2afc6d1c6",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":application_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "application_id",
+                      "description": "(Required) The unique identifier of the application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 422,\n  \"title\": \"Unprocessable Entity\",\n  \"detail\": \"One or more parameter values are invalid.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "60adccac-842b-41ea-9836-4380d3fa2ef0",
+          "name": "Update an application",
+          "request": {
+            "name": "Update an application",
+            "description": {
+              "content": "Update an application by submitting values for its risk_values and coverage_values. Conditional questions may be revealed as values are supplied until the application is complete.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "applications",
+                ":application_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "application_id",
+                  "description": "(Required) The unique identifier of the application."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"risk_values\": [\n    {\n      \"parameter_id\": \"<string>\",\n      \"value\": \"\"\n    },\n    {\n      \"parameter_id\": \"<string>\",\n      \"value\": \"\"\n    }\n  ],\n  \"coverage_values\": [\n    {\n      \"parameter_id\": \"<string>\",\n      \"value\": \"\"\n    },\n    {\n      \"parameter_id\": \"<string>\",\n      \"value\": \"\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6739fc25-505c-4b39-82f9-15b59902e82c",
+              "name": "The updated application.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":application_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "application_id",
+                      "description": "(Required) The unique identifier of the application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"risk_values\": [\n    {\n      \"parameter_id\": \"rsk_b3jm_2017_naics_index\",\n      \"value\": \"\"\n    },\n    {\n      \"parameter_id\": \"rsk_b3jm_2017_naics_index\",\n      \"value\": \"\"\n    }\n  ],\n  \"coverage_values\": [\n    {\n      \"parameter_id\": \"rsk_b3jm_2017_naics_index\",\n      \"value\": \"\"\n    },\n    {\n      \"parameter_id\": \"rsk_b3jm_2017_naics_index\",\n      \"value\": \"\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"app_a1b2c3\",\n  \"status\": \"incomplete\",\n  \"products\": [\n    \"prd_m3qr_herald_general_liability\",\n    \"prd_m3qr_herald_general_liability\"\n  ],\n  \"risk_values\": [\n    {\n      \"parameter_id\": \"rsk_b3jm_2017_naics_index\",\n      \"value\": \"\"\n    },\n    {\n      \"parameter_id\": \"rsk_b3jm_2017_naics_index\",\n      \"value\": \"\"\n    }\n  ],\n  \"coverage_values\": [\n    {\n      \"parameter_id\": \"rsk_b3jm_2017_naics_index\",\n      \"value\": \"\"\n    },\n    {\n      \"parameter_id\": \"rsk_b3jm_2017_naics_index\",\n      \"value\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "988b91aa-58c5-4ee2-8f3f-79bbd78ea820",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":application_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "application_id",
+                      "description": "(Required) The unique identifier of the application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"risk_values\": [\n    {\n      \"parameter_id\": \"rsk_b3jm_2017_naics_index\",\n      \"value\": \"\"\n    },\n    {\n      \"parameter_id\": \"rsk_b3jm_2017_naics_index\",\n      \"value\": \"\"\n    }\n  ],\n  \"coverage_values\": [\n    {\n      \"parameter_id\": \"rsk_b3jm_2017_naics_index\",\n      \"value\": \"\"\n    },\n    {\n      \"parameter_id\": \"rsk_b3jm_2017_naics_index\",\n      \"value\": \"\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 422,\n  \"title\": \"Unprocessable Entity\",\n  \"detail\": \"One or more parameter values are invalid.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8d06e917-8f71-4949-95b1-e442dfe5a62f",
+              "name": "The request was well-formed but contained invalid values.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":application_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "application_id",
+                      "description": "(Required) The unique identifier of the application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"risk_values\": [\n    {\n      \"parameter_id\": \"rsk_b3jm_2017_naics_index\",\n      \"value\": \"\"\n    },\n    {\n      \"parameter_id\": \"rsk_b3jm_2017_naics_index\",\n      \"value\": \"\"\n    }\n  ],\n  \"coverage_values\": [\n    {\n      \"parameter_id\": \"rsk_b3jm_2017_naics_index\",\n      \"value\": \"\"\n    },\n    {\n      \"parameter_id\": \"rsk_b3jm_2017_naics_index\",\n      \"value\": \"\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 422,\n  \"title\": \"Unprocessable Entity\",\n  \"detail\": \"One or more parameter values are invalid.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.heraldapi.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "236f630f-9e04-4b84-b015-29175be05934",
+    "name": "Herald Applications API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Herald is a unified REST API for commercial insurance. A single integration lets software platforms create applications, submit them to many carriers, and retrieve normalized quotes, products, classifications, distributors, producers, and files. Requests are authenticated with an OAuth2 client-credentials bearer token; an API key may also be supplied directly as a bearer token. The API is resource-oriented with JSON request and response bodies and standard HTTP status codes.\n\nContact Support:\n Name: Herald Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Herald Applications Producers API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Producers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List producers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.heraldapi.com/distributors/:distributor_id/producers",
+            "params": [
+              {
+                "name": "distributor_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the distributor."
+              }
+            ]
+          },
+          "docs": "List producers"
+        },
+        {
+          "info": {
+            "name": "Create a producer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.heraldapi.com/distributors/:distributor_id/producers",
+            "params": [
+              {
+                "name": "distributor_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the distributor."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a producer beneath a distributor. Producers connect to products and submit applications."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
