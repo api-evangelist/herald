@@ -37,6 +37,8 @@ apis:
   humanURL: https://docs.heraldapi.com/docs/heraldapi/5c69a421b6680-api-reference
   baseURL: https://api.heraldapi.com
   tags:
+  - Application
+  tags_raw:
   - Applications
   properties:
   - type: OpenAPI
@@ -157,6 +159,8 @@ apis:
   humanURL: https://docs.heraldapi.com/docs/heraldapi/5c69a421b6680-api-reference
   baseURL: https://api.heraldapi.com
   tags:
+  - File
+  tags_raw:
   - Files
   properties:
   - type: OpenAPI
@@ -217,6 +221,8 @@ apis:
   humanURL: https://docs.heraldapi.com/docs/heraldapi/5c69a421b6680-api-reference
   baseURL: https://api.heraldapi.com
   tags:
+  - Product
+  tags_raw:
   - Products
   properties:
   - type: OpenAPI
@@ -307,6 +313,8 @@ apis:
   humanURL: https://docs.heraldapi.com/docs/heraldapi/5c69a421b6680-api-reference
   baseURL: https://api.heraldapi.com
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
