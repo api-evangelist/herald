@@ -7,6 +7,18 @@ description: Herald builds digital infrastructure for commercial insurance, prov
   carriers and lines of business. Developers create applications, submit them to
   carriers, and receive normalized quotes, products, classifications, and files
   through one integration secured with OAuth2 client-credentials bearer tokens.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
