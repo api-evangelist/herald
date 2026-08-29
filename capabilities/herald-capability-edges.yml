@@ -1,0 +1,62 @@
+slug: herald
+provider: Herald
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Insurance
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 5
+edges:
+- tag: Producers
+  spec_file: herald-producers-api-openapi.yml
+  capability_id: BC-2110.10
+  capability_id_l1: BC-2110
+  capability_name: Producer & Intermediary Management
+  confidence: 0.85
+  evidence: POST /distributors/{distributor_id}/producers  createProducer  Create a producer; GET .../producers  listProducers
+  reason: Producers are created and listed under distributors — direct producer/intermediary master management
+    in insurance distribution.
+- tag: Submissions
+  spec_file: herald-submissions-api-openapi.yml
+  capability_id: BC-2110.60
+  capability_id_l1: BC-2110
+  capability_name: Quote & Submission Management
+  confidence: 0.85
+  evidence: POST /submissions  createSubmission  Submit an application to carriers
+  reason: Explicitly submits insurance applications to carriers and tracks the resulting submission —
+    submission intake and quote flow in distribution.
+- tag: Distributors
+  spec_file: herald-distributors-api-openapi.yml
+  capability_id: BC-2110.10
+  capability_id_l1: BC-2110
+  capability_name: Producer & Intermediary Management
+  confidence: 0.8
+  evidence: POST /distributors  createDistributor  Create a distributor; GET /distributors  listDistributors
+  reason: Creation and listing of distributor entities in a commercial insurance distribution platform
+    is onboarding and management of intermediaries.
+- tag: Quotes
+  spec_file: herald-quotes-api-openapi.yml
+  capability_id: BC-2110.60
+  capability_id_l1: BC-2110
+  capability_name: Quote & Submission Management
+  confidence: 0.8
+  evidence: GET /quotes/{quote_id}  getQuote; "retrieve normalized quotes" ... "lets software platforms
+    quote and bind across many carriers"
+  reason: Retrieval of carrier quotes returned against a submitted application — quote handling within
+    the submission-to-bind distribution flow.
+- tag: Products
+  spec_file: herald-products-api-openapi.yml
+  capability_id: BC-2100.10
+  capability_id_l1: BC-2100
+  capability_name: Insurance Product Catalogue Management
+  confidence: 0.75
+  evidence: GET /products  listProducts; GET /products/{product_id}  getProduct — "retrieve normalized
+    quotes, products, classifications"
+  reason: Read access to a normalized catalogue of carrier insurance products across lines of business,
+    i.e. insurance product catalogue/master data exposure. Read-only surface, so not full lifecycle.

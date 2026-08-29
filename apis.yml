@@ -352,6 +352,9 @@ apis:
   - type: Documentation
     url: https://www.heraldai.com/docs/webhooks
 common:
+- type: CapabilityMap
+  url: capabilities/herald-capability-edges.yml
+  name: Herald Business Capability Map
 - type: AgenticAccess
   url: agentic-access/herald-agentic-access.yml
 - type: DomainSecurity
