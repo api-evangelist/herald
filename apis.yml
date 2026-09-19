@@ -40,6 +40,12 @@ tags:
 - Insurtech
 - Commercial Insurance
 - Quoting
+- Carrier
+tags_raw:
+- Insurance
+- Insurtech
+- Commercial Insurance
+- Quoting
 - Carriers
 created: '2026-06-25'
 modified: '2026-06-25'
@@ -143,6 +149,8 @@ apis:
   humanURL: https://docs.heraldapi.com/docs/heraldapi/5c69a421b6680-api-reference
   baseURL: https://api.heraldapi.com
   tags:
+  - Distributor
+  tags_raw:
   - Distributors
   properties:
   - type: OpenAPI
