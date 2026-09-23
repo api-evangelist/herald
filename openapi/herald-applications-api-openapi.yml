@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: Herald Applications API
   description: Herald is a unified REST API for commercial insurance. A single integration lets software platforms create applications, submit them to many carriers, and retrieve normalized quotes, products, classifications, distributors, producers, and files. Requests are authenticated with an OAuth2 client-credentials bearer token; an API key may also be supplied directly as a bearer token. The API is resource-oriented with JSON request and response bodies and standard HTTP status codes.
@@ -82,34 +82,6 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
 components:
   schemas:
-    ParameterValue:
-      type: object
-      properties:
-        parameter_id:
-          type: string
-          example: rsk_b3jm_2017_naics_index
-        value: {}
-    ApplicationCreateRequest:
-      type: object
-      required:
-      - products
-      properties:
-        products:
-          type: array
-          items:
-            type: string
-            example: prd_m3qr_herald_general_liability
-    ApplicationUpdateRequest:
-      type: object
-      properties:
-        risk_values:
-          type: array
-          items:
-            $ref: '#/components/schemas/ParameterValue'
-        coverage_values:
-          type: array
-          items:
-            $ref: '#/components/schemas/ParameterValue'
     Application:
       type: object
       properties:
@@ -132,6 +104,34 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ParameterValue'
+    ApplicationCreateRequest:
+      type: object
+      required:
+      - products
+      properties:
+        products:
+          type: array
+          items:
+            type: string
+            example: prd_m3qr_herald_general_liability
+    ParameterValue:
+      type: object
+      properties:
+        parameter_id:
+          type: string
+          example: rsk_b3jm_2017_naics_index
+        value: {}
+    ApplicationUpdateRequest:
+      type: object
+      properties:
+        risk_values:
+          type: array
+          items:
+            $ref: '#/components/schemas/ParameterValue'
+        coverage_values:
+          type: array
+          items:
+            $ref: '#/components/schemas/ParameterValue'
     Error:
       type: object
       properties:
@@ -145,8 +145,8 @@ components:
           type: string
           example: One or more parameter values are invalid.
   responses:
-    Unauthorized:
-      description: Authentication credentials were missing or invalid.
+    UnprocessableEntity:
+      description: The request was well-formed but contained invalid values.
       content:
         application/json:
           schema:
@@ -157,8 +157,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    UnprocessableEntity:
-      description: The request was well-formed but contained invalid values.
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
       content:
         application/json:
           schema:

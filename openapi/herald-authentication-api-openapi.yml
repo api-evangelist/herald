@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Herald Applications Authentication API
+  title: Herald Authentication API
   description: Herald is a unified REST API for commercial insurance. A single integration lets software platforms create applications, submit them to many carriers, and retrieve normalized quotes, products, classifications, distributors, producers, and files. Requests are authenticated with an OAuth2 client-credentials bearer token; an API key may also be supplied directly as a bearer token. The API is resource-oriented with JSON request and response bodies and standard HTTP status codes.
   termsOfService: https://www.heraldapi.com
   contact:
@@ -21,7 +21,7 @@ paths:
       tags:
       - Authentication
       summary: Exchange API credentials for an access token
-      description: Use the OAuth2 client-credentials grant to exchange a client_id and client_secret for a short-lived bearer access token. Access tokens expire 24 hours after issuance. The returned token is sent in the Authorization header as `Bearer <access_token>` on subsequent calls.
+      description: Use the OAuth2 client-credentials grant to exchange a client_id and client_secret for a short-lived bearer access token. Access tokens expire 24 hours after issuance. The returned token is sent in the Authorization header as `Bearer ` on subsequent calls.
       security: []
       requestBody:
         required: true
@@ -39,26 +39,7 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Authentication credentials were missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    AccessTokenResponse:
-      type: object
-      properties:
-        access_token:
-          type: string
-        token_type:
-          type: string
-          example: Bearer
-        expires_in:
-          type: integer
-          description: Lifetime of the access token in seconds.
-          example: 86400
     AccessTokenRequest:
       type: object
       required:
@@ -73,6 +54,18 @@ components:
           type: string
         client_secret:
           type: string
+    AccessTokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+        token_type:
+          type: string
+          example: Bearer
+        expires_in:
+          type: integer
+          description: Lifetime of the access token in seconds.
+          example: 86400
     Error:
       type: object
       properties:
@@ -85,6 +78,13 @@ components:
         detail:
           type: string
           example: One or more parameter values are invalid.
+  responses:
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

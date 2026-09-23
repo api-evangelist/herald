@@ -1,16 +1,7 @@
 {
   "provider": "herald",
   "sources": [
-    "herald-applications-api-openapi.yml",
-    "herald-authentication-api-openapi.yml",
-    "herald-classifications-api-openapi.yml",
-    "herald-distributors-api-openapi.yml",
-    "herald-files-api-openapi.yml",
-    "herald-producers-api-openapi.yml",
-    "herald-products-api-openapi.yml",
-    "herald-quotes-api-openapi.yml",
-    "herald-submissions-api-openapi.yml",
-    "herald-webhooks-api-openapi.yml"
+    "_original/herald-openapi.yml"
   ],
   "outputs": [
     "herald-applications-api-openapi.yml",
@@ -27,6 +18,21 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "herald-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "herald-applications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "herald-authentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "herald-classifications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "herald-distributors-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "herald-files-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "herald-producers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "herald-products-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "herald-quotes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "herald-submissions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "herald-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

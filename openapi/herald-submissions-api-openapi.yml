@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Herald Applications Submissions API
+  title: Herald Submissions API
   description: Herald is a unified REST API for commercial insurance. A single integration lets software platforms create applications, submit them to many carriers, and retrieve normalized quotes, products, classifications, distributors, producers, and files. Requests are authenticated with an OAuth2 client-credentials bearer token; an API key may also be supplied directly as a bearer token. The API is resource-oriented with JSON request and response bodies and standard HTTP status codes.
   termsOfService: https://www.heraldapi.com
   contact:
@@ -58,17 +58,9 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  parameters:
-    SubmissionId:
-      name: submission_id
-      in: path
-      required: true
-      description: The unique identifier of the submission.
-      schema:
-        type: string
   responses:
-    Unauthorized:
-      description: Authentication credentials were missing or invalid.
+    UnprocessableEntity:
+      description: The request was well-formed but contained invalid values.
       content:
         application/json:
           schema:
@@ -79,12 +71,20 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    UnprocessableEntity:
-      description: The request was well-formed but contained invalid values.
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    SubmissionId:
+      name: submission_id
+      in: path
+      required: true
+      description: The unique identifier of the submission.
+      schema:
+        type: string
   schemas:
     SubmissionCreateRequest:
       type: object

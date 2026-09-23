@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Herald Applications Quotes API
+  title: Herald Quotes API
   description: Herald is a unified REST API for commercial insurance. A single integration lets software platforms create applications, submit them to many carriers, and retrieve normalized quotes, products, classifications, distributors, producers, and files. Requests are authenticated with an OAuth2 client-credentials bearer token; an API key may also be supplied directly as a bearer token. The API is resource-oriented with JSON request and response bodies and standard HTTP status codes.
   termsOfService: https://www.heraldapi.com
   contact:
@@ -42,14 +42,26 @@ components:
       description: The unique identifier of the quote.
       schema:
         type: string
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    File:
+      type: object
+      properties:
+        id:
+          type: string
+          example: fil_3c4d
+        status:
+          type: string
+          example: available
+        file_name:
+          type: string
+          example: quote-letter.pdf
+        content_type:
+          type: string
+          example: application/pdf
+        download_url:
+          type: string
+          format: uri
+          description: A temporary, time-limited download link.
     Quote:
       type: object
       properties:
@@ -72,25 +84,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/File'
-    File:
-      type: object
-      properties:
-        id:
-          type: string
-          example: fil_3c4d
-        status:
-          type: string
-          example: available
-        file_name:
-          type: string
-          example: quote-letter.pdf
-        content_type:
-          type: string
-          example: application/pdf
-        download_url:
-          type: string
-          format: uri
-          description: A temporary, time-limited download link.
     Error:
       type: object
       properties:
@@ -103,6 +96,13 @@ components:
         detail:
           type: string
           example: One or more parameter values are invalid.
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

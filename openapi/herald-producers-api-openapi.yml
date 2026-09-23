@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Herald Applications Producers API
+  title: Herald Producers API
   description: Herald is a unified REST API for commercial insurance. A single integration lets software platforms create applications, submit them to many carriers, and retrieve normalized quotes, products, classifications, distributors, producers, and files. Requests are authenticated with an OAuth2 client-credentials bearer token; an API key may also be supplied directly as a bearer token. The API is resource-oriented with JSON request and response bodies and standard HTTP status codes.
   termsOfService: https://www.heraldapi.com
   contact:
@@ -56,14 +56,6 @@ paths:
                       $ref: '#/components/schemas/Producer'
 components:
   schemas:
-    ProducerCreateRequest:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          example: Jane Broker
     Producer:
       type: object
       properties:
@@ -73,6 +65,14 @@ components:
         distributor_id:
           type: string
           example: dst_1a2b
+        name:
+          type: string
+          example: Jane Broker
+    ProducerCreateRequest:
+      type: object
+      required:
+      - name
+      properties:
         name:
           type: string
           example: Jane Broker
