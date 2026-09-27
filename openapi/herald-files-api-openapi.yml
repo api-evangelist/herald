@@ -35,6 +35,18 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 422
+        title:
+          type: string
+          example: Unprocessable Entity
+        detail:
+          type: string
+          example: One or more parameter values are invalid.
     File:
       type: object
       properties:
@@ -54,18 +66,13 @@ components:
           type: string
           format: uri
           description: A temporary, time-limited download link.
-    Error:
-      type: object
-      properties:
-        status:
-          type: integer
-          example: 422
-        title:
-          type: string
-          example: Unprocessable Entity
-        detail:
-          type: string
-          example: One or more parameter values are invalid.
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     FileId:
       name: file_id
@@ -74,13 +81,6 @@ components:
       description: The unique identifier of the file.
       schema:
         type: string
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

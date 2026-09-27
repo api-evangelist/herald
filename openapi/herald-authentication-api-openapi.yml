@@ -40,6 +40,18 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 422
+        title:
+          type: string
+          example: Unprocessable Entity
+        detail:
+          type: string
+          example: One or more parameter values are invalid.
     AccessTokenRequest:
       type: object
       required:
@@ -66,18 +78,6 @@ components:
           type: integer
           description: Lifetime of the access token in seconds.
           example: 86400
-    Error:
-      type: object
-      properties:
-        status:
-          type: integer
-          example: 422
-        title:
-          type: string
-          example: Unprocessable Entity
-        detail:
-          type: string
-          example: One or more parameter values are invalid.
   responses:
     Unauthorized:
       description: Authentication credentials were missing or invalid.

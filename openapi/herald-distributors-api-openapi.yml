@@ -56,6 +56,31 @@ paths:
                       $ref: '#/components/schemas/Distributor'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 422
+        title:
+          type: string
+          example: Unprocessable Entity
+        detail:
+          type: string
+          example: One or more parameter values are invalid.
+    DistributorCreateRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          example: Acme Insurance Agency
+        domains:
+          type: array
+          items:
+            type: string
+            example: acme-insurance.com
     Distributor:
       type: object
       properties:
@@ -70,31 +95,6 @@ components:
           items:
             type: string
             example: acme-insurance.com
-    DistributorCreateRequest:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          example: Acme Insurance Agency
-        domains:
-          type: array
-          items:
-            type: string
-            example: acme-insurance.com
-    Error:
-      type: object
-      properties:
-        status:
-          type: integer
-          example: 422
-        title:
-          type: string
-          example: Unprocessable Entity
-        detail:
-          type: string
-          example: One or more parameter values are invalid.
   responses:
     Unauthorized:
       description: Authentication credentials were missing or invalid.

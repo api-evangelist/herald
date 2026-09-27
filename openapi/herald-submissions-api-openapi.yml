@@ -58,34 +58,19 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    UnprocessableEntity:
-      description: The request was well-formed but contained invalid values.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication credentials were missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  parameters:
-    SubmissionId:
-      name: submission_id
-      in: path
-      required: true
-      description: The unique identifier of the submission.
-      schema:
-        type: string
   schemas:
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 422
+        title:
+          type: string
+          example: Unprocessable Entity
+        detail:
+          type: string
+          example: One or more parameter values are invalid.
     SubmissionCreateRequest:
       type: object
       required:
@@ -122,18 +107,33 @@ components:
               product_id:
                 type: string
                 example: prd_m3qr_herald_general_liability
-    Error:
-      type: object
-      properties:
-        status:
-          type: integer
-          example: 422
-        title:
-          type: string
-          example: Unprocessable Entity
-        detail:
-          type: string
-          example: One or more parameter values are invalid.
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnprocessableEntity:
+      description: The request was well-formed but contained invalid values.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    SubmissionId:
+      name: submission_id
+      in: path
+      required: true
+      description: The unique identifier of the submission.
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

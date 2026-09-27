@@ -34,14 +34,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  parameters:
-    QuoteId:
-      name: quote_id
-      in: path
-      required: true
-      description: The unique identifier of the quote.
-      schema:
-        type: string
   schemas:
     File:
       type: object
@@ -62,6 +54,18 @@ components:
           type: string
           format: uri
           description: A temporary, time-limited download link.
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 422
+        title:
+          type: string
+          example: Unprocessable Entity
+        detail:
+          type: string
+          example: One or more parameter values are invalid.
     Quote:
       type: object
       properties:
@@ -84,18 +88,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/File'
-    Error:
-      type: object
-      properties:
-        status:
-          type: integer
-          example: 422
-        title:
-          type: string
-          example: Unprocessable Entity
-        detail:
-          type: string
-          example: One or more parameter values are invalid.
+  parameters:
+    QuoteId:
+      name: quote_id
+      in: path
+      required: true
+      description: The unique identifier of the quote.
+      schema:
+        type: string
   responses:
     NotFound:
       description: The requested resource was not found.
