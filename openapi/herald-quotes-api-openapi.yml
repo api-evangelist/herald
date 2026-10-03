@@ -34,7 +34,34 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    QuoteId:
+      name: quote_id
+      in: path
+      required: true
+      description: The unique identifier of the quote.
+      schema:
+        type: string
   schemas:
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 422
+        title:
+          type: string
+          example: Unprocessable Entity
+        detail:
+          type: string
+          example: One or more parameter values are invalid.
     File:
       type: object
       properties:
@@ -54,18 +81,6 @@ components:
           type: string
           format: uri
           description: A temporary, time-limited download link.
-    Error:
-      type: object
-      properties:
-        status:
-          type: integer
-          example: 422
-        title:
-          type: string
-          example: Unprocessable Entity
-        detail:
-          type: string
-          example: One or more parameter values are invalid.
     Quote:
       type: object
       properties:
@@ -88,21 +103,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/File'
-  parameters:
-    QuoteId:
-      name: quote_id
-      in: path
-      required: true
-      description: The unique identifier of the quote.
-      schema:
-        type: string
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

@@ -56,14 +56,6 @@ paths:
                       $ref: '#/components/schemas/Producer'
 components:
   schemas:
-    ProducerCreateRequest:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          example: Jane Broker
     Producer:
       type: object
       properties:
@@ -73,6 +65,14 @@ components:
         distributor_id:
           type: string
           example: dst_1a2b
+        name:
+          type: string
+          example: Jane Broker
+    ProducerCreateRequest:
+      type: object
+      required:
+      - name
+      properties:
         name:
           type: string
           example: Jane Broker

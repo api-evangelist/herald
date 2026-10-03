@@ -81,7 +81,37 @@ paths:
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnprocessableEntity:
+      description: The request was well-formed but contained invalid values.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    ApplicationUpdateRequest:
+      type: object
+      properties:
+        risk_values:
+          type: array
+          items:
+            $ref: '#/components/schemas/ParameterValue'
+        coverage_values:
+          type: array
+          items:
+            $ref: '#/components/schemas/ParameterValue'
     Error:
       type: object
       properties:
@@ -94,34 +124,6 @@ components:
         detail:
           type: string
           example: One or more parameter values are invalid.
-    ApplicationCreateRequest:
-      type: object
-      required:
-      - products
-      properties:
-        products:
-          type: array
-          items:
-            type: string
-            example: prd_m3qr_herald_general_liability
-    ApplicationUpdateRequest:
-      type: object
-      properties:
-        risk_values:
-          type: array
-          items:
-            $ref: '#/components/schemas/ParameterValue'
-        coverage_values:
-          type: array
-          items:
-            $ref: '#/components/schemas/ParameterValue'
-    ParameterValue:
-      type: object
-      properties:
-        parameter_id:
-          type: string
-          example: rsk_b3jm_2017_naics_index
-        value: {}
     Application:
       type: object
       properties:
@@ -144,6 +146,23 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ParameterValue'
+    ApplicationCreateRequest:
+      type: object
+      required:
+      - products
+      properties:
+        products:
+          type: array
+          items:
+            type: string
+            example: prd_m3qr_herald_general_liability
+    ParameterValue:
+      type: object
+      properties:
+        parameter_id:
+          type: string
+          example: rsk_b3jm_2017_naics_index
+        value: {}
   parameters:
     ApplicationId:
       name: application_id
@@ -152,25 +171,6 @@ components:
       description: The unique identifier of the application.
       schema:
         type: string
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication credentials were missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    UnprocessableEntity:
-      description: The request was well-formed but contained invalid values.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

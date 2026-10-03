@@ -58,7 +58,46 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnprocessableEntity:
+      description: The request was well-formed but contained invalid values.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Submission:
+      type: object
+      properties:
+        id:
+          type: string
+          example: sub_7h6g
+        producer_id:
+          type: string
+          example: prdcr_9f8e
+        quote_previews:
+          type: array
+          items:
+            type: object
+            properties:
+              quote_id:
+                type: string
+                example: qot_5d4c
+              product_id:
+                type: string
+                example: prd_m3qr_herald_general_liability
     Error:
       type: object
       properties:
@@ -87,45 +126,6 @@ components:
             id:
               type: string
               example: app_a1b2c3
-    Submission:
-      type: object
-      properties:
-        id:
-          type: string
-          example: sub_7h6g
-        producer_id:
-          type: string
-          example: prdcr_9f8e
-        quote_previews:
-          type: array
-          items:
-            type: object
-            properties:
-              quote_id:
-                type: string
-                example: qot_5d4c
-              product_id:
-                type: string
-                example: prd_m3qr_herald_general_liability
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication credentials were missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    UnprocessableEntity:
-      description: The request was well-formed but contained invalid values.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
     SubmissionId:
       name: submission_id

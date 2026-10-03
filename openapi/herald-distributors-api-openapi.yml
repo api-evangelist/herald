@@ -56,18 +56,6 @@ paths:
                       $ref: '#/components/schemas/Distributor'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        status:
-          type: integer
-          example: 422
-        title:
-          type: string
-          example: Unprocessable Entity
-        detail:
-          type: string
-          example: One or more parameter values are invalid.
     DistributorCreateRequest:
       type: object
       required:
@@ -81,6 +69,18 @@ components:
           items:
             type: string
             example: acme-insurance.com
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 422
+        title:
+          type: string
+          example: Unprocessable Entity
+        detail:
+          type: string
+          example: One or more parameter values are invalid.
     Distributor:
       type: object
       properties:
