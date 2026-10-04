@@ -68,37 +68,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication credentials were missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    WebhookCreateRequest:
-      type: object
-      required:
-      - url
-      - event_types
-      properties:
-        url:
-          type: string
-          format: uri
-          example: https://example.com/herald/webhook
-        event_types:
-          type: array
-          items:
-            type: string
-          example:
-          - quote_status_update
-          - policy_status_update
     Error:
       type: object
       properties:
@@ -129,6 +99,23 @@ components:
           - quote_status_update
           - file_status_update
           - submission_creation
+    WebhookCreateRequest:
+      type: object
+      required:
+      - url
+      - event_types
+      properties:
+        url:
+          type: string
+          format: uri
+          example: https://example.com/herald/webhook
+        event_types:
+          type: array
+          items:
+            type: string
+          example:
+          - quote_status_update
+          - policy_status_update
   parameters:
     WebhookId:
       name: webhook_id
@@ -137,6 +124,19 @@ components:
       description: The unique identifier of the webhook subscription.
       schema:
         type: string
+  responses:
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http
