@@ -35,6 +35,25 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    File:
+      type: object
+      properties:
+        id:
+          type: string
+          example: fil_3c4d
+        status:
+          type: string
+          example: available
+        file_name:
+          type: string
+          example: quote-letter.pdf
+        content_type:
+          type: string
+          example: application/pdf
+        download_url:
+          type: string
+          format: uri
+          description: A temporary, time-limited download link.
     Error:
       type: object
       properties:
@@ -69,25 +88,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/File'
-    File:
-      type: object
-      properties:
-        id:
-          type: string
-          example: fil_3c4d
-        status:
-          type: string
-          example: available
-        file_name:
-          type: string
-          example: quote-letter.pdf
-        content_type:
-          type: string
-          example: application/pdf
-        download_url:
-          type: string
-          format: uri
-          description: A temporary, time-limited download link.
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     QuoteId:
       name: quote_id
@@ -96,13 +103,6 @@ components:
       description: The unique identifier of the quote.
       schema:
         type: string
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

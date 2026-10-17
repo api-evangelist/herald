@@ -44,6 +44,13 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Error:
       type: object
@@ -70,13 +77,6 @@ components:
         naics_code:
           type: string
           example: '722511'
-  responses:
-    Unauthorized:
-      description: Authentication credentials were missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

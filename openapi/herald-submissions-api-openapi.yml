@@ -59,18 +59,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        status:
-          type: integer
-          example: 422
-        title:
-          type: string
-          example: Unprocessable Entity
-        detail:
-          type: string
-          example: One or more parameter values are invalid.
     SubmissionCreateRequest:
       type: object
       required:
@@ -107,13 +95,19 @@ components:
               product_id:
                 type: string
                 example: prd_m3qr_herald_general_liability
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 422
+        title:
+          type: string
+          example: Unprocessable Entity
+        detail:
+          type: string
+          example: One or more parameter values are invalid.
   responses:
-    Unauthorized:
-      description: Authentication credentials were missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     UnprocessableEntity:
       description: The request was well-formed but contained invalid values.
       content:
@@ -122,6 +116,12 @@ components:
             $ref: '#/components/schemas/Error'
     NotFound:
       description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
       content:
         application/json:
           schema:

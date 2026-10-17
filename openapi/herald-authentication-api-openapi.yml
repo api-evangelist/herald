@@ -40,18 +40,18 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    Error:
+    AccessTokenResponse:
       type: object
       properties:
-        status:
+        access_token:
+          type: string
+        token_type:
+          type: string
+          example: Bearer
+        expires_in:
           type: integer
-          example: 422
-        title:
-          type: string
-          example: Unprocessable Entity
-        detail:
-          type: string
-          example: One or more parameter values are invalid.
+          description: Lifetime of the access token in seconds.
+          example: 86400
     AccessTokenRequest:
       type: object
       required:
@@ -66,18 +66,18 @@ components:
           type: string
         client_secret:
           type: string
-    AccessTokenResponse:
+    Error:
       type: object
       properties:
-        access_token:
-          type: string
-        token_type:
-          type: string
-          example: Bearer
-        expires_in:
+        status:
           type: integer
-          description: Lifetime of the access token in seconds.
-          example: 86400
+          example: 422
+        title:
+          type: string
+          example: Unprocessable Entity
+        detail:
+          type: string
+          example: One or more parameter values are invalid.
   responses:
     Unauthorized:
       description: Authentication credentials were missing or invalid.

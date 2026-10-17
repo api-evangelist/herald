@@ -55,12 +55,33 @@ paths:
                     items:
                       $ref: '#/components/schemas/Distributor'
 components:
+  responses:
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     DistributorCreateRequest:
       type: object
       required:
       - name
       properties:
+        name:
+          type: string
+          example: Acme Insurance Agency
+        domains:
+          type: array
+          items:
+            type: string
+            example: acme-insurance.com
+    Distributor:
+      type: object
+      properties:
+        id:
+          type: string
+          example: dst_1a2b
         name:
           type: string
           example: Acme Insurance Agency
@@ -81,27 +102,6 @@ components:
         detail:
           type: string
           example: One or more parameter values are invalid.
-    Distributor:
-      type: object
-      properties:
-        id:
-          type: string
-          example: dst_1a2b
-        name:
-          type: string
-          example: Acme Insurance Agency
-        domains:
-          type: array
-          items:
-            type: string
-            example: acme-insurance.com
-  responses:
-    Unauthorized:
-      description: Authentication credentials were missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http
