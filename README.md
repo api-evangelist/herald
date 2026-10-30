@@ -1,4 +1,4 @@
-# Herald (herald)
+# Herald
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,174 +66,132 @@
 
 Herald builds digital infrastructure for commercial insurance, providing a single unified REST API that lets software platforms quote and bind across many carriers and lines of business. Developers create applications, submit them to carriers, and receive normalized quotes, products, classifications, and files through one integration secured with OAuth2 client-credentials bearer tokens.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/herald/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/herald/refs/heads/main/apis.yml)
+**Areas:** Insurance · Insurtech · Commercial Insurance · Quoting · Carrier
 
-## Tags
+## Herald on APIs.io
 
-- Insurance
-- Insurtech
-- Commercial Insurance
-- Quoting
-- Carriers
+Everything profiled for Herald is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/herald/](https://apis.io/providers/herald/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (10)
 
-- **Created:** 2026-06-25
-- **Modified:** 2026-06-25
+- [Herald Applications API](https://apis.io/apis/herald/herald-applications-api/) — The Applications API from Herald — 2 operation(s) for applications.
+- [Herald Authentication API](https://apis.io/apis/herald/herald-authentication-api/) — The Authentication API from Herald — 1 operation(s) for authentication.
+- [Herald Classifications API](https://apis.io/apis/herald/herald-classifications-api/) — The Classifications API from Herald — 1 operation(s) for classifications.
+- [Herald Distributors API](https://apis.io/apis/herald/herald-distributors-api/) — The Distributors API from Herald — 1 operation(s) for distributors.
+- [Herald Files API](https://apis.io/apis/herald/herald-files-api/) — The Files API from Herald — 1 operation(s) for files.
+- [Herald Producers API](https://apis.io/apis/herald/herald-producers-api/) — The Producers API from Herald — 1 operation(s) for producers.
+- [Herald Products API](https://apis.io/apis/herald/herald-products-api/) — The Products API from Herald — 2 operation(s) for products.
+- [Herald Quotes API](https://apis.io/apis/herald/herald-quotes-api/) — The Quotes API from Herald — 1 operation(s) for quotes.
+- [Herald Submissions API](https://apis.io/apis/herald/herald-submissions-api/) — The Submissions API from Herald — 2 operation(s) for submissions.
+- [Herald Webhooks API](https://apis.io/apis/herald/herald-webhooks-api/) — The Webhooks API from Herald — 2 operation(s) for webhooks.
 
-## APIs
+### Published properties
 
-### Herald Applications API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Create and manage commercial-insurance applications for a set of products, supplying risk_values and coverage_values until the application is complete and ready to submit to carriers.
+#### Agentic access (1)
 
-- **Human URL:** [https://docs.heraldapi.com/docs/heraldapi/5c69a421b6680-api-reference](https://docs.heraldapi.com/docs/heraldapi/5c69a421b6680-api-reference)
-- **Base URL:** `https://api.heraldapi.com`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Herald Agentic Access](https://apis.io/agentic-access/herald/herald-agentic-access/)
 
-- Applications
-- Risk Values
-- Coverage Values
+#### Collections (11)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [Documentation](https://www.heraldai.com/docs/application)
-- [API Reference](https://docs.heraldapi.com/docs/heraldapi/5c69a421b6680-api-reference)
-- [OpenAPI](openapi/herald-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/herald.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/herald.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Herald API](https://apis.io/collections/herald/open-herald/)
+- [Herald Applications API](https://apis.io/collections/herald/open-herald-applications-api/)
+- [Herald Applications Authentication API](https://apis.io/collections/herald/open-herald-authentication-api/)
+- [Herald Applications Classifications API](https://apis.io/collections/herald/open-herald-classifications-api/)
+- [Herald Applications Distributors API](https://apis.io/collections/herald/open-herald-distributors-api/)
+- [Herald Applications Files API](https://apis.io/collections/herald/open-herald-files-api/)
+- [Herald Applications Producers API](https://apis.io/collections/herald/open-herald-producers-api/)
+- [Herald Applications Products API](https://apis.io/collections/herald/open-herald-products-api/)
+- [Herald Applications Quotes API](https://apis.io/collections/herald/open-herald-quotes-api/)
+- [Herald Applications Submissions API](https://apis.io/collections/herald/open-herald-submissions-api/)
+- [Herald Applications Webhooks API](https://apis.io/collections/herald/open-herald-webhooks-api/)
 
-### Herald Quotes API
+#### Security (2)
 
-Submit completed applications to carriers via submissions and retrieve normalized quotes, polling individual quotes by quote_id until each quote and its files reach an available status.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://www.heraldapi.com/docs/quotes](https://www.heraldapi.com/docs/quotes)
-- **Base URL:** `https://api.heraldapi.com`
+- [Herald Authentication](https://apis.io/security/herald/herald-authentication/)
+- [Herald Domain Security](https://apis.io/security/herald/herald-domain-security/)
 
-#### Tags
+#### Plans and pricing (1)
 
-- Quotes
-- Submissions
-- Binding
+Published plans, tiers and prices.
 
-#### Properties
+- [Herald Plans Pricing](https://apis.io/plans/herald/herald-plans-pricing/)
 
-- [Documentation](https://www.heraldapi.com/docs/quotes)
-- [OpenAPI](openapi/herald-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/herald.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/herald.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Rate limits (1)
 
-### Herald Products API
+Published request limits.
 
-List the insurance products a producer has access to, each identified by a unique product_id describing the carrier and line of business along with its appetite and underwriting question set.
+- [Herald Rate Limits](https://apis.io/rate-limits/herald/herald-rate-limits/)
 
-- **Human URL:** [https://www.heraldai.com/docs/products](https://www.heraldai.com/docs/products)
-- **Base URL:** `https://api.heraldapi.com`
+#### FinOps (1)
 
-#### Tags
+What the API costs to run, by operation.
 
-- Products
-- Producers
-- Appetite
+- [Herald Finops](https://apis.io/finops/herald/herald-finops/)
 
-#### Properties
+## Where to find this API
 
-- [Documentation](https://www.heraldai.com/docs/products)
-- [OpenAPI](openapi/herald-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/herald.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/herald.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-### Herald Classifications API
-
-Look up Herald's normalized NAICS index-entry classifications, where each Herald Code maps to the corresponding carrier code for every supported product so risk can be classified consistently across carriers.
-
-- **Human URL:** [https://www.heraldai.com/docs/classifications](https://www.heraldai.com/docs/classifications)
-- **Base URL:** `https://api.heraldapi.com`
-
-#### Tags
-
-- Classifications
-- NAICS
-- Industry Codes
-
-#### Properties
-
-- [Documentation](https://www.heraldai.com/docs/classifications)
-- [OpenAPI](openapi/herald-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/herald.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/herald.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Herald Distributors API
-
-Create and manage distributors - the organizational layer above producers - then create and list the producers beneath each distributor that connect to products and submit applications.
-
-- **Human URL:** [https://www.heraldai.com/docs/create-and-manage-distributors](https://www.heraldai.com/docs/create-and-manage-distributors)
-- **Base URL:** `https://api.heraldapi.com`
-
-#### Tags
-
-- Distributors
-- Producers
-- Onboarding
-
-#### Properties
-
-- [Documentation](https://www.heraldai.com/docs/create-and-manage-distributors)
-- [OpenAPI](openapi/herald-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/herald.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/herald.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Herald Files API
-
-Retrieve file metadata by file_id and generate temporary download links for quote letters, applications, and policy documents once a file reaches an available status.
-
-- **Human URL:** [https://www.heraldai.com/docs/getting-files](https://www.heraldai.com/docs/getting-files)
-- **Base URL:** `https://api.heraldapi.com`
-
-#### Tags
-
-- Files
-- Documents
-- Downloads
-
-#### Properties
-
-- [Documentation](https://www.heraldai.com/docs/getting-files)
-- [OpenAPI](openapi/herald-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/herald.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/herald.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Herald Webhooks API
-
-Register webhook subscriptions and receive POST callbacks for status-change and creation events such as quote, file, and policy status updates and submission creation, retried on non-200 responses.
-
-- **Human URL:** [https://www.heraldai.com/docs/webhooks](https://www.heraldai.com/docs/webhooks)
-- **Base URL:** `https://api.heraldapi.com`
-
-#### Tags
-
-- Webhooks
-- Events
-- Notifications
-
-#### Properties
-
-- [Documentation](https://www.heraldai.com/docs/webhooks)
-- [OpenAPI](openapi/herald-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/herald.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/herald.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [LinkedIn](https://www.linkedin.com/company/heraldapi)
 - [Website](https://www.heraldapi.com)
 - [Documentation](https://docs.heraldapi.com)
-- [Plans](plans/herald-plans-pricing.yml)
-- [Rate Limits](rate-limits/herald-rate-limits.yml)
-- [Fin Ops](finops/herald-finops.yml)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 24.5** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 46.0 |
+| Contract governance | 0.0 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 29.8 |
+| Access clarity | 5.3 |
+
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 10.5** — Insurance
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/herald/](https://apis.io/providers/herald/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Herald: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/herald/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
